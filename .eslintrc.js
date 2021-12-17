@@ -2,7 +2,7 @@ module.exports = {
   'parserOptions': {
     'ecmaVersion': 2020,
     'sourceType': 'module',
-    'parser': '@typescript-eslint/parse',
+    'parser': '@typescript-eslint/parser',
     'ecmaFeatures': {
       'jsx': true,
     }
@@ -14,11 +14,20 @@ module.exports = {
     'jest/globals': true,
     'browser': true,
   },
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
+  'plugins': [
+    'react',
+    '@typescript-eslint',
+  ],
   'extends': [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
     'plugin:jest/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   'rules': {
     'indent': [
@@ -106,12 +115,13 @@ module.exports = {
       'anonymous': 'never',
       'asyncArrow': 'always'
     }],
-    'no-unused-vars': [ 'error', {
-      args: 'none' // reason: preserve fn interfaces, eg: const onClick = (data, event) => {/* ... */};
-    }],
     'react/display-name': 0,
     'react/prop-types': 0,
-    '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/no-unused-vars': [ 'error', {
+      args: 'none'
+    }],
   }
 };

@@ -1,6 +1,7 @@
 
-// const BASEPATH = 'https://eaglelizard-files.herokuapp.com/v2/image/';
-const BASEPATH = 'http://localhost:4269/v2/image/';
+const BASEPATH = 'https://eaglelizard-files.herokuapp.com/v2/image/';
+// const BASEPATH = 'https://eaglelizard.wm.r.appspot.com/image/v0/';
+// const BASEPATH = 'http://localhost:4269/v2/image/';
 
 export const LOGO = imageUri('WebsiteLogo-min.png');
 export const HOME = imageUri('projects-home.png');
@@ -22,6 +23,9 @@ export const LARAMIE = imageUri('laramie.jpg');
 export const MRBURNS = imageUri('mrburns.jpg');
 export const TAMINGOFTHESHREW = imageUri('tamingoftheshrew.jpg');
 export const URINETOWN = imageUri('urinetown.jpg');
+export const SWEENEY = imageUri('sweeneytodd.jpg');
+export const CINDERELLA = imageUri('cinderella.jpg');
+export const JAMES_AND_THE_GIANT_PEACH = imageUri('jamesandthegiantpeach.jpg');
 
 export const ART_GALLERY = imageUris([
   'art/art1.png',
@@ -36,6 +40,63 @@ export const ART_GALLERY = imageUris([
   'art/art10.jpg',
   'art/art11.jpg',
   'art/art12.png',
+  'renaissancefaire/renaissancefaire1.jpg',
+  'renaissancefaire/renaissancefaire2.jpg',
+  // 'renaissancefaire/Shield1.png',
+  // 'renaissancefaire/Shield2.png',
+  // 'renaissancefaire/Shield3.png',
+  // 'renaissancefaire/Shield4.png',
+  'renaissancefaire/renaissancefaire19_1.jpg',
+  'renaissancefaire/renaissancefaire19_2.jpg',
+  'renaissancefaire/renaissancefaire19_3.jpg',
+]);
+
+export const JAMES_AND_THE_GIANT_PEACH_GALLERY = imageUris([
+  'jamesandthegiantpeach/jamesandthegiantpeach1.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach2.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach3.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach4.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach5.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach6.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach7.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach8.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach9.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach10.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach11.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach12.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach13.jpg',
+  'jamesandthegiantpeach/jamesandthegiantpeach14.jpg',
+]);
+
+export const CINDERELLA_GALLERY = imageUris([
+  'cinderella/cinderella1.jpg',
+  'cinderella/cinderella2.jpg',
+  'cinderella/cinderella3.jpg',
+  'cinderella/cinderella4.jpg',
+  'cinderella/cinderella5.jpg',
+  'cinderella/cinderella6.jpg',
+  'cinderella/cinderella7.jpg',
+]);
+
+export const SWEENEY_GALLERY = imageUris([
+  'sweeneytodd/sweeneytodd14.jpg',
+  'sweeneytodd/sweeneytodd9.jpg',
+  'sweeneytodd/sweeneytodd12.jpg',
+  'sweeneytodd/sweeneytodd3.jpg',
+  'sweeneytodd/sweeneytodd10.jpg',
+  'sweeneytodd/sweeneytodd15.jpg',
+  'sweeneytodd/sweeneytodd4.jpg',
+  'sweeneytodd/sweeneytodd11.jpg',
+  'sweeneytodd/sweeneytodd6.jpg',
+  'sweeneytodd/sweeneytodd7.jpg',
+  'sweeneytodd/sweeneytodd8.jpg',
+  'sweeneytodd/sweeneytodd1.jpg',
+  'sweeneytodd/sweeneytodd5.jpg',
+  'sweeneytodd/sweeneytodd2.jpg',
+  'sweeneytodd/sweeneytodd13.jpg',
+  'sweeneytodd/sweeneytodd16.jpg',
+  'sweeneytodd/sweeneytodd17.jpg',
+  'sweeneytodd/sweeneytodd18.jpg',
 ]);
 
 export const TAMINGOFTHESHREW_GALLERY = imageUris([

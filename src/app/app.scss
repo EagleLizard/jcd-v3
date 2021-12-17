@@ -1,9 +1,24 @@
 
+$top-nav-height: 64px;
+
 .app-main {
   .header-text {
     font-size: 24px;
   }
   .text-content {
     background-color: rgba(152, 253, 0, 0.5);
+  }
+  .top-nav-container {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: auto;
+    width: 100%;
+    min-height: $top-nav-height;
+    background-color: chartreuse;
+    z-index: 1;
+  }
+  .app-content-container {
+    padding-top: $top-nav-height;
   }
 }
