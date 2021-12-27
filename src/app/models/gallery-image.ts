@@ -1,5 +1,5 @@
 
-import { JCD_PROJECT_ENUM } from '../constants/gallery-constants'
+import { JCD_PROJECT_ENUM } from '../constants/gallery-constants';
 
 export class GalleryImage {
   constructor(

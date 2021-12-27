@@ -1,5 +1,8 @@
 
 export enum JCD_PROJECT_ENUM {
+  // non-scenic
+  ART = 'ART',
+  // scenic
   JAMES_AND_THE_GIANT_PEACH = 'JAMES_AND_THE_GIANT_PEACH',
   CINDERELLA = 'CINDERELLA',
   SWEENEY = 'SWEENEY',

@@ -1,10 +1,8 @@
 import './scenery-section.scss';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
-import { SCENIC_PROJECTS } from '@constants/gallery-constants';
-import { GalleryImage } from '../../models/gallery-image';
-import { getScenicGallery } from '../../services/gallery-service';
 import { SceneryPage, SCENERY_SECTION_ROUTE } from './scenery-page/scenery-page';
+import { SceneryGalleryPage } from './scenery-gallery-page/scenery-gallery-page';
 
 interface HomeSectionProps {
 
@@ -24,8 +22,8 @@ export function ScenerySection(props: HomeSectionProps) {
         <Route exact path={`/${SCENERY_SECTION_ROUTE}`}>
           <SceneryPage/>
         </Route>
-        <Route path={`/${SCENERY_SECTION_ROUTE}/${testSubroute}`}>
-          Subroute Test
+        <Route path={`/${SCENERY_SECTION_ROUTE}/:scenicPage`}>
+          <SceneryGalleryPage/>
         </Route>
       </Switch>
     </div>

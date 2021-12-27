@@ -4,20 +4,27 @@ import React, { useEffect, useState } from 'react';
 
 import { GalleryImage } from '../../../../models/gallery-image';
 import { getResizedUri } from '../../../../services/gallery-service';
+import { Gallery } from '../../../../models/gallery';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 interface ScenicGalleryTileProps {
-  galleryImage: GalleryImage;
+  gallery: Gallery;
 }
 
 export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
   const [ previewUri, setPreviewUri ] = useState<string>();
   const [ tileHovered, setTileHovered ] = useState<boolean>(false);
+  const [ gallerPagePath, setGalleryPagePath ] = useState<string>();
+
+  const routeMatch = useRouteMatch();
 
   useEffect(() => {
-    let nextPreviewUri: string;
-    nextPreviewUri = getResizedUri(props.galleryImage.uri, 1920);
+    let nextPreviewUri: string, nextGalleryPagePath: string;
+    nextPreviewUri = getResizedUri(props.gallery.image.uri, 1920);
+    nextGalleryPagePath = `${routeMatch.path}/${props.gallery.route}`;
     setPreviewUri(nextPreviewUri);
-  }, [ props.galleryImage ]);
+    setGalleryPagePath(nextGalleryPagePath);
+  }, [ props.gallery ]);
 
   return (
     <div className="scenic-gallery-tile"
@@ -32,11 +39,14 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
           />
         )}
       </div>
-      <a  className="image-overlay">
+      <Link
+        className="image-overlay"
+        to={gallerPagePath}
+      >
         <div className="overlay-text-container">
-          { props.galleryImage.galleryKey }
+          { props.gallery.galleryKey }
         </div>
-      </a>
+      </Link>
     </div>
   );
 
