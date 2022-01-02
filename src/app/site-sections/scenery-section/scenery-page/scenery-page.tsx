@@ -1,8 +1,7 @@
 
 import './scenery-page.scss';
 import React, { useEffect, useState } from 'react';
-import { getScenicGallery, getScenicGalleryImage } from '../../../services/gallery-service';
-import { GalleryImage } from '../../../models/gallery-image';
+import { getScenicGallery } from '../../../services/gallery-service';
 import { SCENIC_PROJECTS } from '../../../constants/gallery-constants';
 import { ScenicGalleryTile } from './scenic-gallery-tile/scenic-gallery-tile';
 import { Gallery } from '../../../models/gallery';
@@ -21,8 +20,6 @@ export function SceneryPage(props: SceneryPageProps) {
     nextScenicGalleries = SCENIC_PROJECTS.map(galleryKey => {
       return getScenicGallery(galleryKey);
     });
-    console.log('nextGalleryImages');
-    console.log(nextScenicGalleries);
     setScenicGalleries(nextScenicGalleries);
   }, []);
 

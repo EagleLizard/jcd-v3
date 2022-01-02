@@ -2,10 +2,13 @@
 import './scenic-gallery-tile.scss';
 import React, { useEffect, useState } from 'react';
 
-import { GalleryImage } from '../../../../models/gallery-image';
 import { getResizedUri } from '../../../../services/gallery-service';
 import { Gallery } from '../../../../models/gallery';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { MAX_HORIZONTAL_RES, MAX_VERTICAL_RES } from '../../../../constants/constants';
+
+const GALLERY_TILE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES);
+const GALLERY_TILE_IMG_WIDTH = Math.round(MAX_HORIZONTAL_RES);
 
 interface ScenicGalleryTileProps {
   gallery: Gallery;
@@ -14,24 +17,25 @@ interface ScenicGalleryTileProps {
 export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
   const [ previewUri, setPreviewUri ] = useState<string>();
   const [ tileHovered, setTileHovered ] = useState<boolean>(false);
-  const [ gallerPagePath, setGalleryPagePath ] = useState<string>();
 
   const routeMatch = useRouteMatch();
+  const galleryPagePath = `${routeMatch.path}/${props.gallery.route}`;
 
   useEffect(() => {
-    let nextPreviewUri: string, nextGalleryPagePath: string;
-    nextPreviewUri = getResizedUri(props.gallery.image.uri, 1920);
-    nextGalleryPagePath = `${routeMatch.path}/${props.gallery.route}`;
+    let nextPreviewUri: string;
+    nextPreviewUri = getResizedUri({
+      uri: props.gallery.image.uri,
+      width: GALLERY_TILE_IMG_WIDTH,
+      height: GALLERY_TILE_IMG_HEIGHT,
+    });
     setPreviewUri(nextPreviewUri);
-    setGalleryPagePath(nextGalleryPagePath);
   }, [ props.gallery ]);
 
   return (
     <div className="scenic-gallery-tile"
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="scenic-gallery-img">
+      onMouseLeave={handleMouseLeave}>
+      <div className="image-preview">
         {previewUri && (
           <img
             src={previewUri}
@@ -41,7 +45,7 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
       </div>
       <Link
         className="image-overlay"
-        to={gallerPagePath}
+        to={galleryPagePath}
       >
         <div className="overlay-text-container">
           { props.gallery.galleryKey }

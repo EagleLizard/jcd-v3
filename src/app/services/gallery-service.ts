@@ -7,6 +7,12 @@ import { SCENIC_GALLERY_IMAGES } from '../constants/scenic-galleries';
 import { Gallery } from '../models/gallery';
 import { GalleryImage } from '../models/gallery-image';
 
+export interface ResizeUriOpts {
+  uri: string;
+  width?: number;
+  height?: number;
+}
+
 export function getScenicGalleryImage(galleryKey: JCD_PROJECT_ENUM): GalleryImage {
   let foundGallery: GalleryImage;
   foundGallery = SCENIC_GALLERY_IMAGES.find(sceniceGallery => {
@@ -18,12 +24,22 @@ export function getScenicGalleryImage(galleryKey: JCD_PROJECT_ENUM): GalleryImag
   return foundGallery;
 }
 
-export function getResizedUri(uri: string, width: number) {
+export function getResizedUri(opts: ResizeUriOpts) {
   let parsedUri: ParsedUrl, parsedQuery: ParsedQuery;
   let resizedUri: string;
+  const {
+    uri,
+    width,
+    height,
+  } = opts;
   parsedUri = queryString.parseUrl(uri);
   parsedQuery = parsedUri.query;
-  parsedQuery.width = width + '';
+  if(opts.width !== undefined) {
+    parsedQuery.width = width + '';
+  }
+  if(opts.height !== undefined) {
+    parsedQuery.height = height + '';
+  }
   resizedUri = queryString.stringifyUrl({
     url: parsedUri.url,
     query: parsedQuery

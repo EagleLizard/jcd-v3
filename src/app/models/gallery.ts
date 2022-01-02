@@ -1,6 +1,6 @@
 
 import { JCD_PROJECT_ENUM } from '../constants/gallery-constants';
-import { getResizedUri } from '../services/gallery-service';
+import { getResizedUri, ResizeUriOpts } from '../services/gallery-service';
 import { GalleryImage } from './gallery-image';
 
 export interface MediaAndPressDetail {
@@ -53,10 +53,10 @@ export class Gallery {
     this.image = image;
   }
 
-  static getWidthUri(uri:string, width: number) {
+  static getWidthUri(opts: ResizeUriOpts) {
     //strip any existing options,
     // add width query parameter provided
-    return getResizedUri(uri, width);
+    return getResizedUri(opts);
   }
 
   hasDetail() {

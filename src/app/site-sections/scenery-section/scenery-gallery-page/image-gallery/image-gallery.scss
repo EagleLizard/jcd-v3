@@ -1,0 +1,20 @@
+
+@import '../../../../../styles/mixins.scss';
+
+// $thumbnail-height: 300px;
+// $thumbnail-height: 300px;
+$thumbnail-height: 270px;
+$thumbnail-width: 30vw;
+
+.image-gallery {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .image-preview {
+    @include image-preview-container();
+    margin: 2px;
+    flex: 1 1;
+    max-height: $thumbnail-height;
+  }
+}

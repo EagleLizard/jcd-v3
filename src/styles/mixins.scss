@@ -1,0 +1,9 @@
+
+@mixin image-preview-container {
+  display: flex;
+  width: min-content;
+  img {
+    min-width: 100%;
+    object-fit: cover;
+  }
+}

@@ -1,0 +1,16 @@
+
+@import '../../../styles//mixins.scss';
+
+.top-nav {
+  position: relative;
+  height: 100%;
+  a {
+    .logo-image {
+      display: inline-block;
+      height: 100%;
+      img {
+        max-height: 100%;
+      }
+    }
+  }
+}

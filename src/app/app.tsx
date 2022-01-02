@@ -4,6 +4,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { ScenerySection } from './site-sections/scenery-section/scenery-section';
 import { SCENERY_SECTION_ROUTE } from './site-sections/scenery-section/scenery-page/scenery-page';
+import { TopNav } from './common/top-nav/top-nav';
 
 interface AppProps {
 
@@ -13,7 +14,7 @@ export function JcdApp(props: AppProps) {
   return (
     <div className="app-main">
       <div className="top-nav-container">
-        Top Nav
+        <TopNav/>
       </div>
       <div className="app-content-container">
         <JcdAppRouter/>

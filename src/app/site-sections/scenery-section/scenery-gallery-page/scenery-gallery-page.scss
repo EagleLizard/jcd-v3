@@ -1,4 +1,68 @@
 
+@import '../../../global.scss';
+@import '../../../../styles/mixins.scss';
+
+$gallery-title-font-size: $font-xlg;
+
 .scenery-gallery-page {
-  
+  display: flex;
+  flex-direction: column;
+  .gallery-header-content {
+    height: 40vh;
+    display: flex;
+    padding-bottom: 10px;
+
+    .gallery-header-project-info {
+      align-self: center;
+      flex: 1 1;
+
+      .gallery-title-container {
+        display: flex;
+        .gallery-title {
+          background-color: rgba(255, 255, 255, 1);
+          line-height: $gallery-title-font-size - ($gallery-title-font-size * 0.12);
+          text-transform: uppercase;
+          font-size: $gallery-title-font-size;
+        }
+      }
+    }
+    .gallery-content-image-wrapper {
+      flex: 2 1;
+    }
+  }
+
+  .gallery-detail-container {
+    display: flex;
+    padding-bottom: 10px;
+    .gallery-content-image-wrapper,
+    .gallery-detail-content {
+      display: flex;
+      flex-direction: column;
+    }
+    .gallery-content-image-wrapper {
+      flex: 2 1;
+      .gallery-image-container {
+        flex-basis: 0px;
+        flex-grow: 1;
+        overflow-y: auto;
+      }
+    }
+    .gallery-detail-content {
+      flex: 1 1;
+      padding: 5px 5px;
+    }
+  }
+
+  .gallery-content-image-wrapper {
+    max-width: 60vw;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    .gallery-image-container {
+      @include image-preview-container();
+      height: 100%;
+      width: 100%;
+    }
+  }
 }

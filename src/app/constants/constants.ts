@@ -1,0 +1,8 @@
+
+const MAX_HORIZONTAL_RES = 1920;
+const MAX_VERTICAL_RES = 1080;
+
+export {
+  MAX_HORIZONTAL_RES,
+  MAX_VERTICAL_RES,
+};
