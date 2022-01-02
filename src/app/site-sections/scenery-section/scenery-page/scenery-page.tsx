@@ -25,7 +25,6 @@ export function SceneryPage(props: SceneryPageProps) {
 
   return (
     <div className="scenery-page">
-      Scenery Page
       <div className="scenic-galleries">
         <div className="grid-container">
           {scenicGalleries.map(scenicGallery => {
