@@ -1,10 +1,11 @@
 
 // const BASEPATH = 'https://eaglelizard-files.herokuapp.com/v2/image/';
 // const BASEPATH = 'https://eaglelizard.wm.r.appspot.com/image/v0/';
-const BASEPATH = 'https://eaglelizard.wm.r.appspot.com/image/v1/';
 // const BASEPATH = 'http://localhost:4269/v2/image/';
 // const BASEPATH = 'http://localhost:4369/image/v0/';
-// const BASEPATH = 'http://localhost:4369/image/v1/';
+
+// const BASEPATH = 'https://eaglelizard.wm.r.appspot.com/image/v1/';
+const BASEPATH = 'http://localhost:4369/image/v1/';
 
 export const LOGO = imageUri('JaniceChanLogo2022-min.png');
 export const HOME = imageUri('projects-home.png');

@@ -10,7 +10,7 @@ $gallery-title-font-size: $font-xlg;
   .gallery-header-content {
     height: 40vh;
     display: flex;
-    padding-bottom: 10px;
+    // padding-bottom: 10px;
 
     .gallery-header-project-info {
       align-self: center;
@@ -33,7 +33,7 @@ $gallery-title-font-size: $font-xlg;
 
   .gallery-detail-container {
     display: flex;
-    padding-bottom: 10px;
+    // padding-bottom: 10px;
     .gallery-content-image-wrapper,
     .gallery-detail-content {
       display: flex;
@@ -50,6 +50,7 @@ $gallery-title-font-size: $font-xlg;
     .gallery-detail-content {
       flex: 1 1;
       padding: 5px 5px;
+      min-height: 40vh;
     }
   }
 
@@ -64,5 +65,9 @@ $gallery-title-font-size: $font-xlg;
       height: 100%;
       width: 100%;
     }
+  }
+
+  .gallery-preview-images {
+    max-width: 100%;
   }
 }

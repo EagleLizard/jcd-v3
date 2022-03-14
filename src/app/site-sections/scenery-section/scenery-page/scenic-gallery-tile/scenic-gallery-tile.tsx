@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 import { getResizedUri } from '../../../../services/gallery-service';
 import { Gallery } from '../../../../models/gallery';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { MAX_HORIZONTAL_RES, MAX_VERTICAL_RES } from '../../../../constants/constants';
 
 const GALLERY_TILE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES);
@@ -18,8 +18,7 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
   const [ previewUri, setPreviewUri ] = useState<string>();
   const [ tileHovered, setTileHovered ] = useState<boolean>(false);
 
-  const routeMatch = useRouteMatch();
-  const galleryPagePath = `${routeMatch.path}/${props.gallery.route}`;
+  const galleryPagePath = `${props.gallery.route}`;
 
   useEffect(() => {
     let nextPreviewUri: string;

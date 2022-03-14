@@ -11,8 +11,8 @@
       min-width: 0;
       grid-auto-rows: 40vh;
       grid-auto-flow: dense;
-      grid-column-gap: 5px;
-      grid-row-gap: 5px;
+      // grid-column-gap: 5px;
+      // grid-row-gap: 5px;
       > .grid-item {
         // repeat every 10 items
         &:nth-child(10n + 1) {
