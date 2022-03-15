@@ -2,10 +2,10 @@
 import './media-item.scss';
 import React from 'react';
 
-import { MediaAndPressDetail } from '../../../../../../models/gallery';
+import { JcdMediaAndPressDetail } from '../../../../../../models/jcd-entities';
 
 interface MediaItemProps {
-  mediaItem: MediaAndPressDetail;
+  mediaItem: JcdMediaAndPressDetail;
 }
 
 export function MediaItem(props: MediaItemProps) {

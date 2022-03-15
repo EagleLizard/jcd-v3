@@ -3,12 +3,12 @@ import './scenery-gallery-page.scss';
 import React, { useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
-import { getResizedUri, getScenicGalleryByRoute, getScenicGalleryImage } from '../../../services/gallery-service';
+import { getResizedUri } from '../../../services/gallery-service';
 import { GalleryDetail } from './gallery-detail/gallery-detail';
 import { ImageGallery } from './image-gallery/image-gallery';
 import { MAX_HORIZONTAL_RES, MAX_VERTICAL_RES } from '../../../constants/constants';
-import { Gallery } from '../../../models/gallery';
-import { GalleryImage } from '../../../models/gallery-image';
+import { JcdService } from '../../../services/jcd-service';
+import { JcdProject, JcdProjectPage } from '../../../models/jcd-entities';
 
 const GALLERY_INLINE_IMG_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.69);
 const GALLERY_INLINE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.6);
@@ -19,45 +19,70 @@ interface SceneryGalleryPageProps {
 
 export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
   const [ galleryHeaderUri, setGalleryHeaderUri ] = useState<string>();
-  const [ gallery, setGallery ] = useState<Gallery>();
   const [ galleryUris, setGalleryUris ] = useState<string[]>();
   const [ galleryDetailImageUriResized, setGalleryDetailImageUriResized ] = useState<string>();
+
+  const [ projectRoute, setProjectRoute ] = useState<string>();
+  const [ scenicProject, setScenicProject ] = useState<JcdProject>();
+  const [ scenicProjectPage, setScenicProjectPage ] = useState<JcdProjectPage>();
 
   const routeParams = useParams<Record<string, string>>();
 
   useEffect(() => {
-    let scenicPageKey: string;
-    let nextGallery: Gallery;
-    scenicPageKey = routeParams['scenicPage'];
-    nextGallery = getScenicGalleryByRoute(scenicPageKey);
-    setGallery(nextGallery);
+    let nextProjectRoute: string;
+    nextProjectRoute = routeParams['scenicPage'];
+    setProjectRoute(nextProjectRoute);
   }, [ routeParams ]);
 
   useEffect(() => {
-    let galleryImage: GalleryImage, _galleryDetailImageUri: string;
-    let nextGalleryHeaderUri: string, nextGalleryUris: string[],
-      nextGalleryDetailImageUriResized: string;
-    if(gallery === undefined) {
+    if(projectRoute === undefined) {
       return;
     }
-    galleryImage = getScenicGalleryImage(gallery.galleryKey);
+    getProjectInfo(projectRoute)
+      .catch(err => {
+        console.error(err);
+      });
+  }, [
+    projectRoute,
+  ]);
+
+  useEffect(() => {
+    let headerImageUri: string, detailImageUri: string;
+    let nextGalleryHeaderUri: string, nextGalleryDetailImageUri: string,
+      nextGalleryUris: string[]
+    ;
+    if(scenicProjectPage === undefined) {
+      return;
+    }
+    headerImageUri = JcdService.getImageUri(scenicProject.coverImageUri);
+    detailImageUri = JcdService.getImageUri(scenicProjectPage.galleryImageUris[0]);
     nextGalleryHeaderUri = getResizedUri({
-      uri: galleryImage.uri,
+      uri: headerImageUri,
       width: GALLERY_INLINE_IMG_WIDTH,
       height: GALLERY_INLINE_IMG_HEIGHT,
     });
-    nextGalleryUris = gallery.galleryUris.slice();
-    _galleryDetailImageUri = nextGalleryUris.shift();
-    nextGalleryDetailImageUriResized = getResizedUri({
-      uri: _galleryDetailImageUri,
+    nextGalleryDetailImageUri = getResizedUri({
+      uri: detailImageUri,
       width: GALLERY_INLINE_IMG_WIDTH,
       height: GALLERY_INLINE_IMG_HEIGHT,
     });
+    nextGalleryUris = scenicProjectPage.galleryImageUris
+      .map(JcdService.getImageUri)
+    ;
     setGalleryHeaderUri(nextGalleryHeaderUri);
-    setGalleryHeaderUri(nextGalleryHeaderUri);
+    setGalleryDetailImageUriResized(nextGalleryDetailImageUri);
     setGalleryUris(nextGalleryUris);
-    setGalleryDetailImageUriResized(nextGalleryDetailImageUriResized);
-  }, [ gallery ]);
+  }, [
+    scenicProjectPage,
+  ]);
+
+  async function getProjectInfo(projectRoute: string) {
+    let nextScenicProject: JcdProject, nextScenicProjectPage: JcdProjectPage;
+    nextScenicProject = await JcdService.getProject(projectRoute);
+    nextScenicProjectPage = await JcdService.getProjectPage(nextScenicProject.projectKey);
+    setScenicProject(nextScenicProject);
+    setScenicProjectPage(nextScenicProjectPage);
+  }
 
   return (
     <div className="scenery-gallery-page">
@@ -67,20 +92,22 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
           <div className="gallery-title-container">
             <div className="gallery-title">
               {
-                gallery?.title
+                scenicProject?.title
               }
             </div>
           </div>
           <div className="detail-footer">
             <div className="footer-year">
               {
-                gallery?.year
+                scenicProjectPage?.projectDetails
+                  ? JcdService.getDisplayDate(scenicProjectPage.projectDetails)
+                  : undefined
               }
             </div>
           </div>
           <div className="organization">
             <div className="organization-title">
-              { gallery?.organization }
+              { scenicProjectPage?.projectDetails?.org }
             </div>
           </div>
         </div>
@@ -107,9 +134,9 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
         </div>
 
         <div className="gallery-detail-content">
-          {gallery && (
+          {(scenicProjectPage?.projectDetails) && (
             <GalleryDetail
-              gallery={gallery}
+              projectDetails={scenicProjectPage.projectDetails}
             />
           )}
         </div>

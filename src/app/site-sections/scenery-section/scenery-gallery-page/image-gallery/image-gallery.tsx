@@ -5,7 +5,7 @@ import { getResizedUri } from '../../../../services/gallery-service';
 import { MAX_HORIZONTAL_RES, MAX_VERTICAL_RES } from '../../../../constants/constants';
 
 // const THUMBNAIL_WIDTH = Math.round(MAX_HORIZONTAL_RES / 5);
-const THUMBNAIL_WIDTH = 350;
+const THUMBNAIL_WIDTH = 400;
 // const THUMBNAIL_WIDTH = Math.round(MAX_HORIZONTAL_RES / 4);
 const THUMBNAIL_HEIGHT = Math.round(MAX_VERTICAL_RES / 2);
 // const THUMBNAIL_HEIGHT = 300;

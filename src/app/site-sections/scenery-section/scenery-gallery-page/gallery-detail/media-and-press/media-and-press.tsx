@@ -1,16 +1,16 @@
 import './media-and-press.scss';
 import React from 'react';
 
-import { Gallery } from '../../../../../models/gallery';
 import { MediaItem } from './media-item/media-item';
+import { JcdMediaAndPressDetail } from '../../../../../models/jcd-entities';
 
 interface MediaAndPressProps {
-  gallery: Gallery;
+  mediaAndPress: JcdMediaAndPressDetail[];
 }
 
 export function MediaAndPress(props: MediaAndPressProps) {
   const {
-    gallery,
+    mediaAndPress,
   } = props;
 
   return (
@@ -18,7 +18,7 @@ export function MediaAndPress(props: MediaAndPressProps) {
       <div className="media-and-press-heading">
         Media & Press
       </div>
-      {gallery.mediaAndPress.map((mediaItem, idx) => {
+      {mediaAndPress.map((mediaItem, idx) => {
         return (
           <div
             className="media-item-container"

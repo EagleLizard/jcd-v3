@@ -2,28 +2,33 @@
 import './gallery-detail.scss';
 import React from 'react';
 
-import { Gallery } from '../../../../models/gallery';
 import { OriginalCredits } from './original-credits/original-credits';
 import { MediaAndPress } from './media-and-press/media-and-press';
+import { JcdProjectDetails } from '../../../../models/jcd-entities';
 
 interface GalleryDetailProps {
-  gallery: Gallery;
+  projectDetails: JcdProjectDetails;
 }
 
 export function GalleryDetail(props: GalleryDetailProps) {
   const {
-    gallery,
+    projectDetails,
   } = props;
+
+  const hasOriginalCredits = projectDetails.originalCredits.length > 0;
+  const hasMedia = projectDetails.mediaAndPress.length > 0;
 
   return (
     <div className="gallery-detail">
-      {gallery.hasOriginalCredits() && (
-        <OriginalCredits
-          gallery={gallery}
-        />
+      {hasOriginalCredits && (
+        <div className="original-credits-container">
+          <OriginalCredits
+            originalCredits={props.projectDetails.originalCredits}
+          />
+        </div>
       )}
       <div className="extra-credit">
-        {gallery.description.map((extraCredit, idx) => {
+        {projectDetails.credits.map((extraCredit, idx) => {
           return (
             <div
               className="extra-credit-item"
@@ -35,10 +40,10 @@ export function GalleryDetail(props: GalleryDetailProps) {
           );
         })}
       </div>
-      {gallery.hasMedia() && (
+      {hasMedia && (
         <div className="media-and-press-container">
           <MediaAndPress
-            gallery={gallery}
+            mediaAndPress={projectDetails.mediaAndPress}
           />
         </div>
       )}

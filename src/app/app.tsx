@@ -1,7 +1,7 @@
 
 import './app.scss';
-import React, { useEffect } from 'react';
-import { Navigate, Route, Routes, useParams, useSearchParams } from 'react-router-dom';
+import React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { ScenerySection } from './site-sections/scenery-section/scenery-section';
 import { SCENERY_SECTION_ROUTE } from './site-sections/scenery-section/scenery-page/scenery-page';
 import { TopNav } from './common/top-nav/top-nav';

@@ -1,7 +1,8 @@
+
 import './scenery-section.scss';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { SceneryPage, SCENERY_SECTION_ROUTE } from './scenery-page/scenery-page';
+import { SceneryPage } from './scenery-page/scenery-page';
 import { SceneryGalleryPage } from './scenery-gallery-page/scenery-gallery-page';
 
 interface HomeSectionProps {

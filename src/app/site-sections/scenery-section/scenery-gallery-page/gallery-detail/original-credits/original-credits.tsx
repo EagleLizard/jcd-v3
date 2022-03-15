@@ -1,16 +1,14 @@
 import './original-credits.scss';
 import React from 'react';
 
-import { Gallery } from '../../../../../models/gallery';
-
 interface OriginalCreditsProps {
-  gallery: Gallery
+  originalCredits: string[];
 }
 
 export function OriginalCredits(props: OriginalCreditsProps) {
   return (
     <div className="original-credits">
-      {props.gallery.originalCredits.map(((originalCredit, idx) => {
+      {props.originalCredits.map(((originalCredit, idx) => {
         return (
           <div
             className="original-credit"

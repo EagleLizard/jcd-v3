@@ -1,11 +1,5 @@
 
-// const BASEPATH = 'https://eaglelizard-files.herokuapp.com/v2/image/';
-// const BASEPATH = 'https://eaglelizard.wm.r.appspot.com/image/v0/';
-// const BASEPATH = 'http://localhost:4269/v2/image/';
-// const BASEPATH = 'http://localhost:4369/image/v0/';
-
-// const BASEPATH = 'https://eaglelizard.wm.r.appspot.com/image/v1/';
-const BASEPATH = 'http://localhost:4369/image/v1/';
+import { JCD_IMAGE_BASEPATH } from './constants';
 
 export const LOGO = imageUri('JaniceChanLogo2022-min.png');
 export const HOME = imageUri('projects-home.png');
@@ -326,7 +320,7 @@ export const RENAISSANCE_FAIRE_GALLERY = imageUris([
 ]);
 
 function imageUri(fileKey: string) {
-  return `${BASEPATH}${fileKey}`;
+  return `${JCD_IMAGE_BASEPATH}${fileKey}`;
 }
 
 function imageUris(fileKeys: string []) {
