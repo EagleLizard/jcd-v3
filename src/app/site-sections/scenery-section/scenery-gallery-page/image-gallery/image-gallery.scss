@@ -1,5 +1,6 @@
 
 @import '../../../../../styles/mixins.scss';
+@import '../../../../../styles/responsive.scss';
 
 // $thumbnail-height: 300px;
 // $thumbnail-height: 300px;
@@ -17,6 +18,11 @@ $thumbnail-width: 30vw;
 
   grid-gap: 0px;
   max-width: 100%;
+
+  @include screenSizeSmall {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-auto-rows: 250px;
+  }
 
   .image-preview {
     // height: fit-content;

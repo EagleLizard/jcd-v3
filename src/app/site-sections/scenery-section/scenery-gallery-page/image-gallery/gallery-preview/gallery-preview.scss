@@ -1,0 +1,21 @@
+
+@import '../../../../../../styles/mixins.scss';
+
+.gallery-preview {
+  @include image-preview-container();
+  display: flex;
+  cursor: pointer;
+  overflow: hidden;
+  img {
+    transition-property: transform, opacity;
+    transition-timing-function: ease;
+    transition-duration: 0.3s;
+    // transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  &:hover {
+    img {
+      transform: scale(1.15, 1.15);
+      opacity: 0.85;
+    }
+  }
+}

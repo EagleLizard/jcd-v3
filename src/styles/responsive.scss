@@ -1,0 +1,16 @@
+@mixin phone {
+  @media only screen 
+    and (max-device-width: 480px) {
+      @content;
+  }
+}
+@mixin screenSizeMedium {
+  @media only screen and (max-width: 1500px) and (min-width: 1000px) {
+    @content;
+  }
+}
+@mixin screenSizeSmall {
+  @media only screen and (max-width: 1000px) {
+    @content;
+  }
+}

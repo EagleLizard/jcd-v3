@@ -1,4 +1,6 @@
 
+@import '../../../../styles/responsive.scss';
+
 .scenery-page {
   width: 100vw;
   .scenic-galleries {
@@ -45,6 +47,10 @@
         &:nth-child(10n + 10) {
           grid-column: 1 / 13;
         }
+      }
+
+      @include screenSizeSmall {
+        grid-auto-rows: 20vh;
       }
     }
 
