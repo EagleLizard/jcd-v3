@@ -13,34 +13,41 @@ interface SceneryPageProps {
 
 export function SceneryPage(props: SceneryPageProps) {
   const [ jcdProjects, setJcdProjects ] = useState<JcdProject[]>([]);
+  const [ isLoadingProjects, setIsLoadingProjects ] = useState<boolean>(true);
 
   useEffect(() => {
+    setIsLoadingProjects(true);
     JcdService.getProjects().then(jcdProjects => {
       let nextJcdProjects: JcdProject[];
       nextJcdProjects = jcdProjects;
       setJcdProjects(nextJcdProjects);
     }).catch(err => {
       console.error(err);
+    }).finally(() => {
+      setIsLoadingProjects(false);
     });
   }, []);
 
   return (
     <div className="scenery-page">
-      <div className="scenic-galleries">
-        <div className="grid-container">
-          {jcdProjects.map(jcdProject => {
-            return (
-              <div
-                className="scenic-gallery-tile-container grid-item"
-                key={jcdProject.projectKey}>
-                <ScenicGalleryTile
-                  jcdProject={jcdProject}
-                />
-              </div>
-            );
-          })}
+      {!isLoadingProjects && (
+        <div className="scenic-galleries">
+          <div className="rows-container">
+            {jcdProjects.map(jcdProject => {
+              return (
+                <div
+                  className="scenic-gallery-tile-container"
+                  key={jcdProject.projectKey}
+                >
+                  <ScenicGalleryTile
+                    jcdProject={jcdProject}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
