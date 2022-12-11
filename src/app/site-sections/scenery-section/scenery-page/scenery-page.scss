@@ -15,15 +15,38 @@
         // max-width: calc(100% / 3);
         flex-basis: calc(100vw / 3);
         height: calc(100vh / 4);
-        .scenic-gallery-tile-inner-container {
-          min-height: 100%;
+        // .scenic-gallery-tile-inner-container {
+        //   min-height: 100%;
+        // }
+      }
+    }
+
+    // .scenic-gallery-tile-container {
+    //   overflow: hidden;
+    //   min-width: 0;
+    // }
+
+    .jcd-project-rows-container {
+      max-width: 100%;
+      .jcd-project-row-container {
+        // display: flex;
+        .jcd-project-row {
+          width: 100%;
+          display: flex;
+          .jcd-project-row-item {
+            flex: 1 1;
+            overflow: hidden;
+            // overflow: hidden;
+            // flex: 1 1;
+            // padding: 3px;
+            // margin: 2px;
+            // border: 1px solid;
+            // word-wrap: break-word;
+            // width: 25%;
+          }
         }
       }
     }
 
-    .scenic-gallery-tile-container {
-      overflow: hidden;
-      min-width: 0;
-    }
   }
 }

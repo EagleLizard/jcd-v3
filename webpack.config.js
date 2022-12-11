@@ -45,7 +45,8 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       hot: true,
       open: true,
-      host: '0.0.0.0',
+      // host: '0.0.0.0',
+      host: '127.0.0.1',
       port: 9469,
     },
     module: {
