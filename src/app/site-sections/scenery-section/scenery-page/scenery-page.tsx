@@ -4,7 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { ScenicGalleryTile } from './scenic-gallery-tile/scenic-gallery-tile';
 import { JcdService } from '../../../services/jcd-service';
 import { JcdProject } from '../../../models/jcd-entities';
-import { ScenicRowDescriptor, ScenicPageService, ScenicRowPattern } from '../scenic-page-service';
+import { ScenicPageService, ScenicRowPattern } from '../scenic-page-service';
+import { JcdProjectRow } from './jcd-project-row/jcd-project-row';
 
 export const SCENERY_SECTION_ROUTE = 'scenery';
 
@@ -23,6 +24,10 @@ export function SceneryPage(props: SceneryPageProps) {
       nextScenicRowPatterns = ScenicPageService.getScenicRowPatterns(jcdProjects);
       setScenicRowPatterns(nextScenicRowPatterns);
     }
+    if(jcdProjects.length > 0) {
+      console.log('jcdProjects:');
+      console.log(jcdProjects);
+    }
   }, [
     isLoadingProjects,
     jcdProjects,
@@ -33,6 +38,13 @@ export function SceneryPage(props: SceneryPageProps) {
     JcdService.getProjects().then(jcdProjects => {
       let nextJcdProjects: JcdProject[];
       nextJcdProjects = jcdProjects;
+      /*
+        TODO: Delete this. Increating number of
+          projects srbitrarily to test layout
+      */
+      // nextJcdProjects = nextJcdProjects.concat(
+      //   nextJcdProjects.slice(0, 4)
+      // );
       setJcdProjects(nextJcdProjects);
     }).catch(err => {
       console.error(err);
@@ -51,47 +63,21 @@ export function SceneryPage(props: SceneryPageProps) {
           <div className="jcd-project-rows-container">
             {
               scenicRowPatterns?.map((scenicRowPattern) => {
-                let rowContainerKey: string, projectRowClassName: string;
+                let rowContainerKey: string;
                 rowContainerKey = scenicRowPattern.descriptor.id;
-                projectRowClassName = scenicRowPattern.descriptor.rowClassName;
                 return (
                   <div
                     className="jcd-project-row-container"
                     key={rowContainerKey}
                   >
-                    <div className={`jcd-project-row ${projectRowClassName}`}>
-                      {scenicRowPattern.jcdProjects.map(jcdProject => {
-                        return (
-                          <div
-                            className="jcd-project-row-item"
-                            key={jcdProject.projectKey}
-                          >
-                            <ScenicGalleryTile
-                              jcdProject={jcdProject}
-                            />
-                          </div>
-                        );
-                      })}
-                    </div>
+                    <JcdProjectRow
+                      scenicRowPattern={scenicRowPattern}
+                    />
                   </div>
                 );
               })
             }
           </div>
-          {/* <div className="rows-container">
-            {jcdProjects.map(jcdProject => {
-              return (
-                <div
-                  className="scenic-gallery-tile-container"
-                  key={jcdProject.projectKey}
-                >
-                  <ScenicGalleryTile
-                    jcdProject={jcdProject}
-                  />
-                </div>
-              );
-            })}
-          </div> */}
         </div>
       )}
     </div>
