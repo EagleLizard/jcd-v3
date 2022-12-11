@@ -102,32 +102,37 @@ export class ScenicPageService {
   static getScenicRowPatterns(jcdProjects: JcdProject[]): ScenicRowPattern[] {
     let scenicRowPatterns: ScenicRowPattern[];
     let rowIdx: number, rowDescriptor: ScenicRowDescriptor;
-    let currRowTileCount: number, currRowProjects: JcdProject[];
+    let currRowProjects: JcdProject[];
 
     jcdProjects = jcdProjects.slice();
 
     scenicRowPatterns = [];
     rowIdx = 0;
-    currRowTileCount = 0;
     rowDescriptor = ScenicPageService.getScenicRowDescriptor(rowIdx);
     currRowProjects = [];
 
     while(jcdProjects.length) {
       let projectToAdd: JcdProject;
-      if(currRowTileCount < rowDescriptor.numTiles) {
+      if(currRowProjects.length < rowDescriptor.numTiles) {
         projectToAdd = jcdProjects.shift();
         currRowProjects.push(projectToAdd);
-        currRowTileCount++;
       } else {
         scenicRowPatterns.push({
           descriptor: rowDescriptor,
           jcdProjects: currRowProjects,
         });
-        currRowTileCount = 0;
         currRowProjects = [];
         rowIdx++;
         rowDescriptor = ScenicPageService.getScenicRowDescriptor(rowIdx);
       }
+    }
+    if(currRowProjects.length > 0) {
+      scenicRowPatterns.push({
+        descriptor: rowDescriptor,
+        jcdProjects: currRowProjects,
+      });
+      currRowProjects = [];
+      rowIdx++;
     }
 
     return scenicRowPatterns;
