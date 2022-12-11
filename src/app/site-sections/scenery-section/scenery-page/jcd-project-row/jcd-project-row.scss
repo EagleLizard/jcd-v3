@@ -1,12 +1,4 @@
 
-@mixin project-row-pattern($pattern-number) {
-  &.project-row-pattern-#{$pattern-number} {
-    .jcd-project-row-item {
-      @content;
-    }
-  }
-}
-
 .jcd-project-row {
   width: 100%;
   display: flex;
