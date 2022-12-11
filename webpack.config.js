@@ -24,6 +24,7 @@ module.exports = (env, argv) => {
     devtool: isDevelopment ? 'source-map' : false,
     watch: isDevelopment ? true : false,
     output: {
+      publicPath: '/',
       filename: '[name].[contenthash].js',
       path: DIST_DIR,
       clean: true,
