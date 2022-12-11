@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   min-height: 13.8vh;
-  max-height: 30vh;
+  max-height: 42vh;
   .jcd-project-row-item {
     overflow: hidden;
     // padding: 1px;
@@ -14,20 +14,20 @@
   &.project-row-pattern-1 {
     .jcd-project-row-item {
       &:nth-child(1) {
-        flex: 10 1;
+        flex: 9 1;
       }
       &:nth-child(2) {
-        flex: 9 1;
+        flex: 7 1;
       }
     }
   }
   &.project-row-pattern-2 {
     .jcd-project-row-item {
       &:nth-child(1) {
-        flex: 8 1;
+        flex: 7 1;
       }
       &:nth-child(2) {
-        flex: 9 1;
+        flex: 11 1;
       }
     }
   }
@@ -37,10 +37,10 @@
         flex: 6 1;
       }
       &:nth-child(2) {
-        flex: 7 1;
+        flex: 8 1;
       }
       &:nth-child(3) {
-        flex: 6 1;
+        flex: 7 1;
       }
     }
   }
@@ -50,17 +50,17 @@
         flex: 9 1;
       }
       &:nth-child(2) {
-        flex: 4 1;
+        flex: 6 1;
       }
     }
   }
   &.project-row-pattern-5 {
     .jcd-project-row-item {
       &:nth-child(1) {
-        flex: 1 1;
+        flex: 7 1;
       }
       &:nth-child(2) {
-        flex: 1 1;
+        flex: 8 1;
       }
     }
   }
@@ -80,10 +80,10 @@
   &.project-row-pattern-7 {
     .jcd-project-row-item {
       &:nth-child(1) {
-        flex: 8 1;
+        flex: 11 1;
       }
       &:nth-child(2) {
-        flex: 15 1;
+        flex: 17 1;
       }
     }
   }

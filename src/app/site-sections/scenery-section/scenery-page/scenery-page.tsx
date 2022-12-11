@@ -42,9 +42,11 @@ export function SceneryPage(props: SceneryPageProps) {
         TODO: Delete this. Increating number of
           projects srbitrarily to test layout
       */
-      // nextJcdProjects = nextJcdProjects.concat(
-      //   nextJcdProjects.slice(0, 4)
-      // );
+      // nextJcdProjects = nextJcdProjects
+      //   .concat(
+      //     nextJcdProjects.slice(0, 4)
+      //   )
+      // ;
       setJcdProjects(nextJcdProjects);
     }).catch(err => {
       console.error(err);
