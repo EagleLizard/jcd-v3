@@ -49,7 +49,7 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
         to={galleryPagePath}
       >
         <div className="overlay-text-container">
-          { props.jcdProject.projectKey }
+          { props.jcdProject.title }
         </div>
       </Link>
     </div>

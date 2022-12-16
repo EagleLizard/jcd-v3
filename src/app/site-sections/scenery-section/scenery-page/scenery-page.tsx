@@ -6,6 +6,7 @@ import { JcdService } from '../../../services/jcd-service';
 import { JcdProject } from '../../../models/jcd-entities';
 import { ScenicPageService, ScenicRowPattern } from '../scenic-page-service';
 import { JcdProjectRow } from './jcd-project-row/jcd-project-row';
+import { JcdV3Service } from '../../../services/jcd-v3-service';
 
 export const SCENERY_SECTION_ROUTE = 'scenery';
 
@@ -52,6 +53,13 @@ export function SceneryPage(props: SceneryPageProps) {
       console.error(err);
     }).finally(() => {
       setIsLoadingProjects(false);
+    });
+
+    JcdV3Service.getProjectPreviews().then(jcdProjectPreviews => {
+      console.log('jcdProjectPreviews');
+      console.log(jcdProjectPreviews);
+    }).catch(err => {
+      console.error(err);
     });
   }, []);
 
