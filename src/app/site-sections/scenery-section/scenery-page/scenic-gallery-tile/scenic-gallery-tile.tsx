@@ -5,14 +5,17 @@ import React, { useEffect, useState } from 'react';
 import { getResizedUri } from '../../../../services/gallery-service';
 import { Link } from 'react-router-dom';
 import { MAX_HORIZONTAL_RES, MAX_VERTICAL_RES } from '../../../../constants/constants';
-import { JcdProject } from '../../../../models/jcd-entities';
-import { JcdService } from '../../../../services/jcd-service';
+import { JcdV3ProjectPreview } from '../../../../models/jcd-models-v3/jcd-v3-project-preview';
+import { JcdV3Service } from '../../../../services/jcd-v3-service';
 
 const GALLERY_TILE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES);
 const GALLERY_TILE_IMG_WIDTH = Math.round(MAX_HORIZONTAL_RES);
 
+// const GALLERY_TILE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES / 2);
+// const GALLERY_TILE_IMG_WIDTH = Math.round(MAX_HORIZONTAL_RES / 2);
+
 interface ScenicGalleryTileProps {
-  jcdProject: JcdProject;
+  jcdProject: JcdV3ProjectPreview;
 }
 
 export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
@@ -23,7 +26,7 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
 
   useEffect(() => {
     let nextPreviewUri: string, coverImageUri: string;
-    coverImageUri = JcdService.getImageUri(props.jcdProject.coverImageUri);
+    coverImageUri = JcdV3Service.getImageUri(props.jcdProject.titleUri);
     nextPreviewUri = getResizedUri({
       uri: coverImageUri,
       width: GALLERY_TILE_IMG_WIDTH,

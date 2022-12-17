@@ -7,6 +7,7 @@ import { JcdProject } from '../../../models/jcd-entities';
 import { ScenicPageService, ScenicRowPattern } from '../scenic-page-service';
 import { JcdProjectRow } from './jcd-project-row/jcd-project-row';
 import { JcdV3Service } from '../../../services/jcd-v3-service';
+import { JcdV3ProjectPreview } from '../../../models/jcd-models-v3/jcd-v3-project-preview';
 
 export const SCENERY_SECTION_ROUTE = 'scenery';
 
@@ -15,51 +16,33 @@ interface SceneryPageProps {
 }
 
 export function SceneryPage(props: SceneryPageProps) {
-  const [ jcdProjects, setJcdProjects ] = useState<JcdProject[]>([]);
+  const [ jcdProjectPreviews, setJcdProjectPreviews ] = useState<JcdV3ProjectPreview[]>([]);
   const [ isLoadingProjects, setIsLoadingProjects ] = useState<boolean>(true);
   const [ scenicRowPatterns, setScenicRowPatterns ] = useState<ScenicRowPattern[]>();
 
   useEffect(() => {
     let nextScenicRowPatterns: ScenicRowPattern[];
-    if(!isLoadingProjects && (jcdProjects.length > 0)) {
-      nextScenicRowPatterns = ScenicPageService.getScenicRowPatterns(jcdProjects);
+    if(!isLoadingProjects && (jcdProjectPreviews.length > 0)) {
+      nextScenicRowPatterns = ScenicPageService.getScenicRowPatterns(jcdProjectPreviews);
       setScenicRowPatterns(nextScenicRowPatterns);
     }
-    if(jcdProjects.length > 0) {
+    if(jcdProjectPreviews.length > 0) {
       console.log('jcdProjects:');
-      console.log(jcdProjects);
+      console.log(jcdProjectPreviews);
     }
   }, [
     isLoadingProjects,
-    jcdProjects,
+    jcdProjectPreviews,
   ]);
 
   useEffect(() => {
     setIsLoadingProjects(true);
-    JcdService.getProjects().then(jcdProjects => {
-      let nextJcdProjects: JcdProject[];
-      nextJcdProjects = jcdProjects;
-      /*
-        TODO: Delete this. Increating number of
-          projects srbitrarily to test layout
-      */
-      // nextJcdProjects = nextJcdProjects
-      //   .concat(
-      //     nextJcdProjects.slice(0, 4)
-      //   )
-      // ;
-      setJcdProjects(nextJcdProjects);
+    JcdV3Service.getProjectPreviews().then(projectPreviews => {
+      setJcdProjectPreviews(projectPreviews);
     }).catch(err => {
       console.error(err);
     }).finally(() => {
       setIsLoadingProjects(false);
-    });
-
-    JcdV3Service.getProjectPreviews().then(jcdProjectPreviews => {
-      console.log('jcdProjectPreviews');
-      console.log(jcdProjectPreviews);
-    }).catch(err => {
-      console.error(err);
     });
   }, []);
 
@@ -67,7 +50,7 @@ export function SceneryPage(props: SceneryPageProps) {
     <div className="scenery-page">
       {(
         !isLoadingProjects
-        && (jcdProjects.length > 0)
+        && (jcdProjectPreviews.length > 0)
       ) && (
         <div className="scenic-galleries">
           <div className="jcd-project-rows-container">

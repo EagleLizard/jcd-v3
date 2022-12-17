@@ -9,6 +9,9 @@ import { ImageGallery } from './image-gallery/image-gallery';
 import { MAX_HORIZONTAL_RES, MAX_VERTICAL_RES } from '../../../constants/constants';
 import { JcdService } from '../../../services/jcd-service';
 import { JcdProject, JcdProjectPage } from '../../../models/jcd-entities';
+import { JcdV3Project } from '../../../models/jcd-models-v3/jcd-v3-project';
+import { JcdV3Service } from '../../../services/jcd-v3-service';
+import { JcdV3Image } from '../../../models/jcd-models-v3/jcd-v3-image';
 
 const GALLERY_INLINE_IMG_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.69);
 const GALLERY_INLINE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.6);
@@ -23,8 +26,11 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
   const [ galleryDetailImageUriResized, setGalleryDetailImageUriResized ] = useState<string>();
 
   const [ projectRoute, setProjectRoute ] = useState<string>();
-  const [ scenicProject, setScenicProject ] = useState<JcdProject>();
-  const [ scenicProjectPage, setScenicProjectPage ] = useState<JcdProjectPage>();
+  const [ _scenicProject, _setScenicProject ] = useState<JcdProject>();
+  const [ _scenicProjectPage, _setScenicProjectPage ] = useState<JcdProjectPage>();
+
+  const [ scenicProject, setScenicProject ] = useState<JcdV3Project>();
+  const [ scenicImages, setScenicImages ] = useState<JcdV3Image[]>();
 
   const routeParams = useParams<Record<string, string>>();
 
@@ -38,7 +44,7 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
     if(projectRoute === undefined) {
       return;
     }
-    getProjectInfo(projectRoute)
+    initProject(projectRoute)
       .catch(err => {
         console.error(err);
       });
@@ -47,15 +53,32 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
   ]);
 
   useEffect(() => {
+    let foundTitleImageIdx: number;
+    let galleryImages: JcdV3Image[], titleImage: JcdV3Image;
     let headerImageUri: string, detailImageUri: string;
-    let nextGalleryHeaderUri: string, nextGalleryDetailImageUri: string,
+    let nextGalleryHeaderUri: string,
+      nextGalleryDetailImageUri: string,
       nextGalleryUris: string[]
     ;
-    if(scenicProjectPage === undefined) {
+    if(
+      (scenicImages === undefined)
+      || (scenicImages.length < 1)
+    ) {
       return;
     }
-    headerImageUri = JcdService.getImageUri(scenicProject.coverImageUri);
-    detailImageUri = JcdService.getImageUri(scenicProjectPage.galleryImageUris[0]);
+    galleryImages = scenicImages.slice();
+    foundTitleImageIdx = galleryImages.findIndex(jcdImage => {
+      return jcdImage.imageType === 'TITLE';
+    });
+    if(foundTitleImageIdx === -1) {
+      console.error(galleryImages);
+      throw new Error('Failed to get title image');
+    }
+    titleImage = galleryImages[foundTitleImageIdx];
+    galleryImages.splice(foundTitleImageIdx, 1);
+
+    headerImageUri = JcdV3Service.getImageUri(titleImage.bucketFile);
+    detailImageUri = JcdV3Service.getImageUri(galleryImages[0].bucketFile);
     nextGalleryHeaderUri = getResizedUri({
       uri: headerImageUri,
       width: GALLERY_INLINE_IMG_WIDTH,
@@ -66,22 +89,41 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
       width: GALLERY_INLINE_IMG_WIDTH,
       height: GALLERY_INLINE_IMG_HEIGHT,
     });
-    nextGalleryUris = scenicProjectPage.galleryImageUris
-      .map(JcdService.getImageUri)
-    ;
+    nextGalleryUris = galleryImages.map(jcdImage => {
+      return JcdV3Service.getImageUri(jcdImage.bucketFile);
+    });
+
     setGalleryHeaderUri(nextGalleryHeaderUri);
     setGalleryDetailImageUriResized(nextGalleryDetailImageUri);
     setGalleryUris(nextGalleryUris);
   }, [
-    scenicProjectPage,
+    scenicImages,
   ]);
 
-  async function getProjectInfo(projectRoute: string) {
-    let nextScenicProject: JcdProject, nextScenicProjectPage: JcdProjectPage;
-    nextScenicProject = await JcdService.getProject(projectRoute);
-    nextScenicProjectPage = await JcdService.getProjectPage(nextScenicProject.projectKey);
-    setScenicProject(nextScenicProject);
-    setScenicProjectPage(nextScenicProjectPage);
+  useEffect(() => {
+    if(scenicProject === undefined) {
+      return;
+    }
+    initImages(scenicProject.projectKey)
+      .catch(err => {
+        console.error(err);
+      });
+  }, [
+    scenicProject,
+  ]);
+
+  async function initProject(projectRoute: string) {
+    let jcdProject: JcdV3Project, jcdProjectImages: JcdV3Image[];
+    jcdProject = await JcdV3Service.getProjectByRoute(projectRoute);
+    setScenicProject(jcdProject);
+    console.log('jcdProjectImages');
+    console.log(jcdProjectImages);
+  }
+
+  async function initImages(projectKey: string) {
+    let jcdProjectImages: JcdV3Image[];
+    jcdProjectImages = await JcdV3Service.getProjectImages(projectKey);
+    setScenicImages(jcdProjectImages);
   }
 
   return (
@@ -92,22 +134,22 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
           <div className="gallery-title-container">
             <div className="gallery-title">
               {
-                scenicProject?.title
+                _scenicProject?.title
               }
             </div>
           </div>
           <div className="detail-footer">
             <div className="footer-year">
               {
-                scenicProjectPage?.projectDetails
-                  ? JcdService.getDisplayDate(scenicProjectPage.projectDetails)
+                _scenicProjectPage?.projectDetails
+                  ? JcdService.getDisplayDate(_scenicProjectPage.projectDetails)
                   : undefined
               }
             </div>
           </div>
           <div className="organization">
             <div className="organization-title">
-              { scenicProjectPage?.projectDetails?.org }
+              { _scenicProjectPage?.projectDetails?.org }
             </div>
           </div>
         </div>
@@ -134,9 +176,9 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
         </div>
 
         <div className="gallery-detail-content">
-          {(scenicProjectPage?.projectDetails) && (
+          {(_scenicProjectPage?.projectDetails) && (
             <GalleryDetail
-              projectDetails={scenicProjectPage.projectDetails}
+              projectDetails={_scenicProjectPage.projectDetails}
             />
           )}
         </div>

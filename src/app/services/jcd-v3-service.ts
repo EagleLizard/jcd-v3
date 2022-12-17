@@ -1,5 +1,7 @@
 
-import { JCD_BASE_URI } from '../constants/constants';
+import { JCD_BASE_URI, JCD_V3_IMAGE_BASEPATH } from '../constants/constants';
+import { JcdV3Image } from '../models/jcd-models-v3/jcd-v3-image';
+import { JcdV3Project } from '../models/jcd-models-v3/jcd-v3-project';
 import { JcdV3ProjectPreview } from '../models/jcd-models-v3/jcd-v3-project-preview';
 
 export class JcdV3Service {
@@ -20,4 +22,53 @@ export class JcdV3Service {
     }
     return projectPreviews;
   }
+
+  static async getProjectByRoute(projectRoute: string): Promise<JcdV3Project> {
+    let uri: string;
+    let resp: Response, rawRespData: unknown;
+    let jcdProject: JcdV3Project;
+    uri = `${JCD_BASE_URI}/jcd/v1/project/${projectRoute}`;
+    resp = await fetch(uri);
+    rawRespData = await resp.json();
+    try {
+      jcdProject = JcdV3Project.deserialize(rawRespData);
+      return jcdProject;
+    } catch(e) {
+      console.error(e);
+      throw new Error(`/jcd/v1/project/${projectRoute} endpoint returned unexpected datatype`);
+    }
+  }
+
+  static async getProjectImages(projectKey: string): Promise<JcdV3Image[]> {
+    let uri: string;
+    let resp: Response, rawRespData: unknown;
+    let jcdImages: JcdV3Image[];
+    uri = `${JCD_BASE_URI}/jcd/v1/project/images/${projectKey}`;
+    resp = await fetch(uri);
+    rawRespData = await resp.json();
+    if(!Array.isArray(rawRespData)) {
+      throw new Error(`/jcd/v1/project/images/${projectKey} response has an incorrect schema`);
+    }
+    try {
+      jcdImages = rawRespData.map(JcdV3Image.deserialize);
+      jcdImages.sort((a, b) => {
+        if(a.orderIdx > b.orderIdx) {
+          return 1;
+        } else if(a.orderIdx < b.orderIdx) {
+          return -1;
+        } else {
+          return 0;
+        }
+      });
+      return jcdImages;
+    } catch(e) {
+      console.error(e);
+      throw new Error(`/jcd/v1/project/images/${projectKey} endpoint returned unexpected datatype`);
+    }
+  }
+
+  static getImageUri(resource: string): string {
+    return `${JCD_V3_IMAGE_BASEPATH}${resource}`;
+  }
+
 }

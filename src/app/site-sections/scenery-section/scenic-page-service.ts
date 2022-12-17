@@ -2,6 +2,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { JcdProject } from '../../models/jcd-entities';
+import { JcdV3ProjectPreview } from '../../models/jcd-models-v3/jcd-v3-project-preview';
 
 export enum SCENIC_ROW_PATTERN_ENUM {
   PATTERN_1 = 'PATTERN_1',
@@ -73,7 +74,7 @@ export type ScenicRowDescriptor = BaseScenicRowDescriptor & {
 
 export type ScenicRowPattern = {
   descriptor: ScenicRowDescriptor;
-  jcdProjects: JcdProject[];
+  jcdProjects: JcdV3ProjectPreview[];
 }
 
 export class ScenicPageService {
@@ -99,22 +100,22 @@ export class ScenicPageService {
     return scenicRowDescriptor;
   }
 
-  static getScenicRowPatterns(jcdProjects: JcdProject[]): ScenicRowPattern[] {
+  static getScenicRowPatterns(jcdProjectPreviews: JcdV3ProjectPreview[]): ScenicRowPattern[] {
     let scenicRowPatterns: ScenicRowPattern[];
     let rowIdx: number, rowDescriptor: ScenicRowDescriptor;
-    let currRowProjects: JcdProject[];
+    let currRowProjects: JcdV3ProjectPreview[];
 
-    jcdProjects = jcdProjects.slice();
+    jcdProjectPreviews = jcdProjectPreviews.slice();
 
     scenicRowPatterns = [];
     rowIdx = 0;
     rowDescriptor = ScenicPageService.getScenicRowDescriptor(rowIdx);
     currRowProjects = [];
 
-    while(jcdProjects.length) {
-      let projectToAdd: JcdProject;
+    while(jcdProjectPreviews.length) {
+      let projectToAdd: JcdV3ProjectPreview;
       if(currRowProjects.length < rowDescriptor.numTiles) {
-        projectToAdd = jcdProjects.shift();
+        projectToAdd = jcdProjectPreviews.shift();
         currRowProjects.push(projectToAdd);
       } else {
         scenicRowPatterns.push({
