@@ -1,5 +1,5 @@
 
-import { JCD_BASE_URI, JCD_V3_IMAGE_BASEPATH } from '../constants/constants';
+import { JCD_BASE_URI, JCD_V3_IMAGE_BASEPATH, MONTH_NAMES } from '../constants/constants';
 import { JcdV3Image } from '../models/jcd-models-v3/jcd-v3-image';
 import { JcdV3Project } from '../models/jcd-models-v3/jcd-v3-project';
 import { JcdV3ProjectPreview } from '../models/jcd-models-v3/jcd-v3-project-preview';
@@ -65,6 +65,14 @@ export class JcdV3Service {
       console.error(e);
       throw new Error(`/jcd/v1/project/images/${projectKey} endpoint returned unexpected datatype`);
     }
+  }
+
+  static getDisplayDate(month: number, year: number): string {
+    let displayDate: string;
+    let monthStr: string;
+    monthStr = MONTH_NAMES[month - 1]; // subtract 1 because JS months are 0 indexed
+    displayDate = `${monthStr} ${year}`;
+    return displayDate;
   }
 
   static getImageUri(resource: string): string {

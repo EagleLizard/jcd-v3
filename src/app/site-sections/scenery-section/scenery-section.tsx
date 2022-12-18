@@ -4,6 +4,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { SceneryPage } from './scenery-page/scenery-page';
 import { SceneryGalleryPage } from './scenery-gallery-page/scenery-gallery-page';
+import { ScenicProjectPage } from './scenic-project-page/scenic-project-page';
 
 interface HomeSectionProps {
 
@@ -18,7 +19,8 @@ export function ScenerySection(props: HomeSectionProps) {
           <SceneryPage/>
         )}/>
         <Route path=':scenicPage' element={(
-          <SceneryGalleryPage/>
+          // <SceneryGalleryPage/>
+          <ScenicProjectPage/>
         )}/>
       </Routes>
     </div>

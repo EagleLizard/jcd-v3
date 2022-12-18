@@ -26,10 +26,6 @@ export function SceneryPage(props: SceneryPageProps) {
       nextScenicRowPatterns = ScenicPageService.getScenicRowPatterns(jcdProjectPreviews);
       setScenicRowPatterns(nextScenicRowPatterns);
     }
-    if(jcdProjectPreviews.length > 0) {
-      console.log('jcdProjects:');
-      console.log(jcdProjectPreviews);
-    }
   }, [
     isLoadingProjects,
     jcdProjectPreviews,

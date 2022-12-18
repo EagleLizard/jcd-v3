@@ -104,6 +104,10 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
     if(scenicProject === undefined) {
       return;
     }
+
+    console.log('scenicProject');
+    console.log(scenicProject);
+
     initImages(scenicProject.projectKey)
       .catch(err => {
         console.error(err);
@@ -116,8 +120,6 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
     let jcdProject: JcdV3Project, jcdProjectImages: JcdV3Image[];
     jcdProject = await JcdV3Service.getProjectByRoute(projectRoute);
     setScenicProject(jcdProject);
-    console.log('jcdProjectImages');
-    console.log(jcdProjectImages);
   }
 
   async function initImages(projectKey: string) {
@@ -134,15 +136,18 @@ export function SceneryGalleryPage(props: SceneryGalleryPageProps) {
           <div className="gallery-title-container">
             <div className="gallery-title">
               {
-                _scenicProject?.title
+                scenicProject?.title
               }
             </div>
           </div>
           <div className="detail-footer">
             <div className="footer-year">
               {
-                _scenicProjectPage?.projectDetails
-                  ? JcdService.getDisplayDate(_scenicProjectPage.projectDetails)
+                (
+                  (scenicProject?.year !== undefined)
+                  && (scenicProject?.month !== undefined)
+                )
+                  ? JcdV3Service.getDisplayDate(scenicProject.month, scenicProject.year)
                   : undefined
               }
             </div>

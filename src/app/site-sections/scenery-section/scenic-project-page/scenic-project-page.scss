@@ -1,0 +1,89 @@
+
+@import '../../../global.scss';
+
+$info-sections-vertical-padding: 20px;
+$info-container-padding: 30px;
+
+.scenic-project-page {
+  .title-section {
+    display: flex;
+
+    .title-info {
+      flex: 4 1;
+    }
+    .title-image-section {
+      flex: 6 1;
+    }
+
+    .title-info {
+      padding: $info-container-padding;
+      .project-title {
+        font-size: $font-xlg;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .project-playwrights-container {
+        padding-top: $info-sections-vertical-padding;
+        .project-playwright {
+          font-size: $font-sm;
+          &:not(:first-child) {
+            padding-top: 5px;
+          }
+        }
+      }
+      .project-venue-producer {
+        padding-top: $info-sections-vertical-padding;
+        font-size: $font-sm;
+      }
+      .project-date {
+        padding-top: $info-sections-vertical-padding;
+        text-transform: uppercase;
+        font-size: $font-lg;
+      }
+      .project-description-container {
+        padding-top: $info-sections-vertical-padding;
+        .project-description {
+          font-size: $font-xs;
+          &:not(:first-child) {
+            padding-top: 18px;
+          }
+        }
+      }
+    }
+    .title-image-section {
+      
+      display: flex;
+      // flex-direction: column;
+
+      .title-image-container {
+        // display: flex;
+        // align-items: center;
+        // overflow: hidden;
+      }
+    }
+  }
+  .gallery-heading-section {
+    display: flex;
+    .gallery-heading-image-section {
+      flex: 12 1;
+    }
+    .gallery-heading-info {
+      flex: 9 1;
+    }
+    .gallery-heading-image-container {
+
+    }
+    .gallery-heading-info {
+      padding: $info-container-padding;
+      .production-credits-container {
+        .production-credit {
+          // font-weight: 300;
+          font-size: $font-sm;
+          &:not(:first-child) {
+            padding-top: 5px;
+          }
+        }
+      }
+    }
+  }
+}
