@@ -1,15 +1,16 @@
 
 import './scenery-page.scss';
 import React, { useEffect, useState } from 'react';
-import { ScenicGalleryTile } from './scenic-gallery-tile/scenic-gallery-tile';
-import { JcdService } from '../../../services/jcd-service';
-import { JcdProject } from '../../../models/jcd-entities';
 import { ScenicPageService, ScenicRowPattern } from '../scenic-page-service';
 import { JcdProjectRow } from './jcd-project-row/jcd-project-row';
 import { JcdV3Service } from '../../../services/jcd-v3-service';
 import { JcdV3ProjectPreview } from '../../../models/jcd-models-v3/jcd-v3-project-preview';
 
 export const SCENERY_SECTION_ROUTE = 'scenery';
+
+const scrollPosition = {
+  scrollTop: 0,
+};
 
 interface SceneryPageProps {
 
@@ -42,6 +43,12 @@ export function SceneryPage(props: SceneryPageProps) {
     });
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      document.documentElement.scrollTo(0, scrollPosition.scrollTop);
+    }, 0);
+  });
+
   return (
     <div className="scenery-page">
       {(
@@ -61,6 +68,7 @@ export function SceneryPage(props: SceneryPageProps) {
                   >
                     <JcdProjectRow
                       scenicRowPattern={scenicRowPattern}
+                      onSelect={handleSceniceProjectSelect}
                     />
                   </div>
                 );
@@ -71,4 +79,8 @@ export function SceneryPage(props: SceneryPageProps) {
       )}
     </div>
   );
+
+  function handleSceniceProjectSelect(projectPreview: JcdV3ProjectPreview) {
+    scrollPosition.scrollTop = document.documentElement.scrollTop;
+  }
 }

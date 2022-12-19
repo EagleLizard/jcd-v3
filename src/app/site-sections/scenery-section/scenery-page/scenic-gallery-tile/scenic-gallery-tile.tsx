@@ -38,7 +38,8 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
   return (
     <div className="scenic-gallery-tile"
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}>
+      onMouseLeave={handleMouseLeave}
+    >
       <div className="image-preview">
         {previewUri && (
           <img
@@ -65,5 +66,4 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
   function handleMouseLeave() {
     setTileHovered(false);
   }
-
 }

@@ -19,8 +19,10 @@ export function ScenerySection(props: HomeSectionProps) {
           <SceneryPage/>
         )}/>
         <Route path=':scenicPage' element={(
-          // <SceneryGalleryPage/>
-          <ScenicProjectPage/>
+          <>
+            <ScenicProjectPage/>
+            {/* <SceneryGalleryPage/> */}
+          </>
         )}/>
       </Routes>
     </div>

@@ -132,9 +132,9 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
                   })
                 }
               />
-              {
+              {/* {
                 titleImage.bucketFile
-              }
+              } */}
             </div>
           )}
         </div>

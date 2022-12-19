@@ -5,17 +5,21 @@ $info-sections-vertical-padding: 20px;
 $info-container-padding: 30px;
 
 .scenic-project-page {
+  display: flex;
+  flex-direction: column;
   .title-section {
     display: flex;
+    // height: 40vh;
 
     .title-info {
-      flex: 4 1;
+      flex: 4 0;
     }
     .title-image-section {
       flex: 6 1;
     }
 
     .title-info {
+
       padding: $info-container-padding;
       .project-title {
         font-size: $font-xlg;
@@ -51,14 +55,18 @@ $info-container-padding: 30px;
       }
     }
     .title-image-section {
-      
+      min-width: 0;
       display: flex;
-      // flex-direction: column;
-
+      flex-direction: column;
       .title-image-container {
-        // display: flex;
-        // align-items: center;
-        // overflow: hidden;
+        display: flex;
+        flex-basis: 0px;
+        flex-grow: 1;
+        overflow-y: auto;
+        img {
+          min-width: 100%;
+          object-fit: cover;
+        }
       }
     }
   }
