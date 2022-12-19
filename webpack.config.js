@@ -78,11 +78,10 @@ module.exports = (env, argv) => {
           ],
         },
         {
-          test: /\.(woff|woff2|eot|ttf|svg)$/,
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'fonts/',
+          test: /\.(woff(2)?|ttf|eot)$/,
+          type: 'asset/resource',
+          generator: {
+            filename: 'fonts/[hash][ext]',
           }
         },
       ],
