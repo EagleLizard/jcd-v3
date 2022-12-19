@@ -11,6 +11,9 @@ import { MAX_HORIZONTAL_RES } from '../../../constants/constants';
 const TITLE_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.6);
 const TITLE_IMAGE_HEIGHT = Math.round(MAX_HORIZONTAL_RES * 0.8);
 
+const GALLERY_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.4);
+const GALLERY_IMAGE_HEIGHT = Math.round(MAX_HORIZONTAL_RES * 0.4);
+
 type ScenicProjectPageProps = {
 
 };
@@ -33,7 +36,9 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
     nextProjectRoute = routeParams['scenicPage'];
     initProject(nextProjectRoute);
     setProjectRoute(nextProjectRoute);
-  }, [ routeParams ]);
+  }, [
+    routeParams
+  ]);
 
   useEffect(() => {
     let foundTitleImageIdx: number, foundTitleImage: JcdV3Image;
@@ -55,7 +60,7 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
       nextGalleryImages.splice(foundTitleImageIdx, 1);
       nextGalleryImages.unshift(foundTitleImage);
     }
-    console.log(nextGalleryImages);
+
     setGalleryImages(nextGalleryImages);
     setTitleImage(nextGalleryImages[0]);
     setHeadingImage(nextGalleryImages[1]);
@@ -63,6 +68,12 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
   }, [
     jcdProjectImages,
   ]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.documentElement.scrollTop = 0;
+    });
+  }, []);
 
   return (
     <div className="scenic-project-page">
@@ -141,9 +152,18 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
       </div>
 
       <div className="gallery-heading-section">
-        <div className="gallery-heading-image-section">
+        <div className="title-image-section">
           {(headingImage !== undefined) && (
-            <div className="gallery-heading-image-container">
+            <div className="title-image-container">
+              <img
+                src={
+                  getResizedUri({
+                    uri: JcdV3Service.getImageUri(headingImage.bucketFile),
+                    width: TITLE_IMAGE_WIDTH,
+                    height: TITLE_IMAGE_HEIGHT,
+                  })
+                }
+              />
               {
                 headingImage.bucketFile
               }
@@ -165,6 +185,36 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
               );
             })}
           </div>
+          {(jcdProject?.mediaAndPress?.length > 0) && (
+            <div className="media-and-press-container">
+              {jcdProject.mediaAndPress.map((mediaAndPressItem, idx) => {
+                return (
+                  <div
+                    key={idx}
+                    className="media-and-press-item"
+                  >
+                    {(mediaAndPressItem.description?.length > 0) && (
+                      <div className="media-and-press-description">
+                        {
+                          mediaAndPressItem.description
+                        }
+                      </div>
+                    )}
+                    <div className="media-and-press-link">
+                      <a href={mediaAndPressItem.link.uri}>
+                        {mediaAndPressItem.link.label}
+                      </a>
+                    </div>
+                    <div className="media-and-press-publication">
+                      {
+                        mediaAndPressItem.publication
+                      }
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </div>
 
@@ -178,7 +228,17 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
               key={galleryImage.id}
               className="gallery-image-container"
             >
-              {galleryImage.bucketFile}
+              <div className="gallery-image">
+                <img
+                  src={
+                    getResizedUri({
+                      uri: JcdV3Service.getImageUri(galleryImage.bucketFile),
+                      width: GALLERY_IMAGE_WIDTH,
+                      height: GALLERY_IMAGE_HEIGHT,
+                    })
+                  }
+                />
+              </div>
             </div>
           );
         })}

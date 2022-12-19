@@ -19,7 +19,6 @@ $info-container-padding: 30px;
     }
 
     .title-info {
-
       padding: $info-container-padding;
       .project-title {
         font-size: $font-xlg;
@@ -55,31 +54,16 @@ $info-container-padding: 30px;
       }
     }
     .title-image-section {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      .title-image-container {
-        display: flex;
-        flex-basis: 0px;
-        flex-grow: 1;
-        overflow-y: auto;
-        img {
-          min-width: 100%;
-          object-fit: cover;
-        }
-      }
+      min-height: 50vh;
     }
   }
   .gallery-heading-section {
     display: flex;
-    .gallery-heading-image-section {
+    .title-image-section {
       flex: 12 1;
     }
     .gallery-heading-info {
-      flex: 9 1;
-    }
-    .gallery-heading-image-container {
-
+      flex: 9 0;
     }
     .gallery-heading-info {
       padding: $info-container-padding;
@@ -90,6 +74,90 @@ $info-container-padding: 30px;
           &:not(:first-child) {
             padding-top: 5px;
           }
+        }
+      }
+      .media-and-press-container {
+        padding-top: 30px;
+        .media-and-press-item {
+          .media-and-press-description,
+          .media-and-press-link,
+          .media-and-press-publication {
+            display: inline;
+          }
+
+          .media-and-press-description {
+            padding-right: 5px;
+          }
+
+          .media-and-press-link {
+            padding-right: 5px;
+          }
+
+          &:not(:first-child) {
+            padding-top: 20px;
+          }
+        }
+      }
+    }
+    .title-image-section {
+      min-height: 50vh;
+    }
+  }
+
+  .title-image-section {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    .title-image-container {
+      display: flex;
+      flex-basis: 0px;
+      flex-grow: 1;
+      overflow-y: auto;
+      img {
+        min-width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .gallery-images-section {
+    display: flex;
+    flex-wrap: wrap;
+
+    .gallery-image-container {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      width: 30vw;
+
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+
+      &:nth-child(2n) {
+        width: 30vw;
+      }
+      &:nth-child(3n) {
+        width: 20vw;
+      }
+      &:nth-child(4n) {
+        width: 25vw;
+      }
+      &:nth-child(6n) {
+        width: 40vw;
+      }
+
+      .gallery-image {
+        flex-grow: 1;
+        flex-basis: 20vh;
+        max-height: 35vh;
+        display: flex;
+        height: 100%;
+        img {
+          min-width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
       }
     }
