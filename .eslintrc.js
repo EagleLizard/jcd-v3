@@ -72,7 +72,7 @@ module.exports = {
       'off',
     ],
     'no-var': 'error',
-    'prefer-arrow-callback': 'error',
+    'prefer-arrow-callback': 'off',
     'arrow-spacing': [
       'error',
       { 'before': true, 'after': true }

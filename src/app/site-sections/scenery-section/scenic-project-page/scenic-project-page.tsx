@@ -2,11 +2,14 @@
 import './scenic-project-page.scss';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+
 import { JcdV3Project } from '../../../models/jcd-models-v3/jcd-v3-project';
 import { JcdV3Image } from '../../../models/jcd-models-v3/jcd-v3-image';
 import { JcdV3Service } from '../../../services/jcd-v3-service';
 import { getResizedUri } from '../../../services/gallery-service';
 import { MAX_HORIZONTAL_RES } from '../../../constants/constants';
+import { LighboxGallery } from '../../../common/lightbox-gallery/lightbox-gallery';
 
 const TITLE_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.6);
 const TITLE_IMAGE_HEIGHT = Math.round(MAX_HORIZONTAL_RES * 0.8);
@@ -28,6 +31,8 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
   const [ galleryImages, setGalleryImages ] = useState<JcdV3Image[]>();
 
   const [ gallerySectionStartIdx, setGallerySectionStartIdx ] = useState<number>();
+  const [ lightboxOpen, setLightboxOpen ] = useState<boolean>(false);
+  const [ lightboxImageIdx, setLightboxImageIdx ] = useState<number>();
 
   const routeParams = useParams<Record<string, string>>();
 
@@ -77,7 +82,14 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
 
   return (
     <div className="scenic-project-page">
-
+      {(galleryImages?.length > 0) && (
+        <LighboxGallery
+          jcdImages={galleryImages}
+          selectedImageIdx={lightboxImageIdx}
+          open={lightboxOpen}
+          onClose={handleLightboxOnClose}
+        />
+      )}
       <div className="title-section">
         <div className="title-info">
           <div className="project-title">
@@ -133,7 +145,12 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
 
         <div className="title-image-section">
           {(titleImage !== undefined) && (
-            <div className="title-image-container">
+            <div
+              className="title-image-container lightbox-image-wrapper"
+              onClick={() => {
+                handleImageWrapperClick(titleImage);
+              }}
+            >
               <img
                 src={
                   getResizedUri({
@@ -154,7 +171,12 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
       <div className="gallery-heading-section">
         <div className="title-image-section">
           {(headingImage !== undefined) && (
-            <div className="title-image-container">
+            <div
+              className="title-image-container lightbox-image-wrapper"
+              onClick={() => {
+                handleImageWrapperClick(headingImage);
+              }}
+            >
               <img
                 src={
                   getResizedUri({
@@ -228,7 +250,12 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
               key={galleryImage.id}
               className="gallery-image-container"
             >
-              <div className="gallery-image">
+              <div
+                className="gallery-image lightbox-image-wrapper"
+                onClick={() => {
+                  handleImageWrapperClick(galleryImage);
+                }}
+              >
                 <img
                   src={
                     getResizedUri({
@@ -253,5 +280,26 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
     nextJcdV3ProjectImages = await JcdV3Service.getProjectImages(nextJcdV3Project.projectKey);
     setJcdProject(nextJcdV3Project);
     setJcdProjectImages(nextJcdV3ProjectImages);
+  }
+
+  function handleImageWrapperClick(jcdProjectImage: JcdV3Image) {
+    let nextLightboxOpen: boolean;
+    let foundGalleryIdx: number;
+    foundGalleryIdx = galleryImages.findIndex(galleryImage => {
+      return galleryImage.id === jcdProjectImage.id;
+    });
+    if(foundGalleryIdx === -1) {
+      return;
+    }
+    nextLightboxOpen = true;
+    setLightboxImageIdx(foundGalleryIdx);
+    setLightboxOpen(nextLightboxOpen);
+  }
+
+  function handleLightboxOnClose() {
+    let nextLightboxOpen: boolean;
+    nextLightboxOpen = false;
+    setLightboxImageIdx(undefined);
+    setLightboxOpen(nextLightboxOpen);
   }
 }

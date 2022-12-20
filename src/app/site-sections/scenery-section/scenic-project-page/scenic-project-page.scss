@@ -59,6 +59,13 @@ $info-container-padding: 30px;
     }
   }
 
+  @include screenSizeMedium {
+    .title-section {
+      .title-image-section {
+        min-height: 40vh;
+      }
+    }
+  }
   @include screenSizeSmall {
     .title-section {
       flex-direction: column-reverse;
@@ -117,6 +124,13 @@ $info-container-padding: 30px;
     }
   }
 
+  @include screenSizeMedium {
+    .gallery-heading-section {
+      .title-image-section {
+        min-height: 40vh;
+      }
+    }
+  }
   @include screenSizeSmall {
     .gallery-heading-section {
       flex-direction: column;
@@ -134,7 +148,7 @@ $info-container-padding: 30px;
       display: flex;
       flex-basis: 0px;
       flex-grow: 1;
-      overflow-y: auto;
+      overflow-y: hidden;
       img {
         min-width: 100%;
         object-fit: cover;
@@ -182,6 +196,21 @@ $info-container-padding: 30px;
           object-fit: cover;
         }
       }
+    }
+  }
+
+  .lightbox-image-wrapper {
+    cursor: pointer;
+    &:hover {
+      // transform: perspective(100px) translateZ(10px);
+      img {
+        transform: scale(1.15, 1.15);
+      }
+    }
+    img {
+      transition: transform 0.4s ease;
+      transform: scale(1.01, 1.01);
+      backface-visibility: hidden;
     }
   }
 

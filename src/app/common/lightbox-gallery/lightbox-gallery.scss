@@ -1,0 +1,16 @@
+
+.lightbox-gallery {
+  .lightbox-gallery-image-container {
+    display: flex;
+    .lightbox-gallery-image {
+      display: flex;
+      img {
+        max-width: 85vw;
+        max-height: 85vh;
+        &.image-loading {
+          display: none; 
+        }
+      }
+    }
+  }
+}

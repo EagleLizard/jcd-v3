@@ -13,7 +13,7 @@ $wide-screen-min-width: 1312px;
 @mixin screenSizeMedium {
   @media only screen
     and (min-width: $medium-screen-min-width)
-    and (max-width: ($wide-screen-min-width - 1px)) {
+    and (max-width: ($wide-screen-min-width)) {
     @content;
   }
 }
