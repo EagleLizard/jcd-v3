@@ -1,5 +1,6 @@
 
 @import '../../../global.scss';
+@import '../../../../styles/responsive.scss';
 
 $info-sections-vertical-padding: 20px;
 $info-container-padding: 30px;
@@ -7,9 +8,9 @@ $info-container-padding: 30px;
 .scenic-project-page {
   display: flex;
   flex-direction: column;
+
   .title-section {
     display: flex;
-    // height: 40vh;
 
     .title-info {
       flex: 4 0;
@@ -57,6 +58,16 @@ $info-container-padding: 30px;
       min-height: 50vh;
     }
   }
+
+  @include screenSizeSmall {
+    .title-section {
+      flex-direction: column-reverse;
+      .title-image-section {
+        min-height: 30vh;
+      }
+    }
+  }
+
   .gallery-heading-section {
     display: flex;
     .title-image-section {
@@ -66,6 +77,8 @@ $info-container-padding: 30px;
       flex: 9 0;
     }
     .gallery-heading-info {
+      display: flex;
+      flex-direction: column;
       padding: $info-container-padding;
       .production-credits-container {
         .production-credit {
@@ -101,6 +114,15 @@ $info-container-padding: 30px;
     }
     .title-image-section {
       min-height: 50vh;
+    }
+  }
+
+  @include screenSizeSmall {
+    .gallery-heading-section {
+      flex-direction: column;
+      .title-image-section {
+        min-height: 30vh;
+      }
     }
   }
 
@@ -162,4 +184,15 @@ $info-container-padding: 30px;
       }
     }
   }
+
+  @include screenSizePhone {
+    .gallery-images-section {
+      .gallery-image-container {
+        &:nth-child(1n) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
 }

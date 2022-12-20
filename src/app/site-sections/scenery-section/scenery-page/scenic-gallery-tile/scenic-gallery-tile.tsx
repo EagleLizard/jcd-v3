@@ -20,7 +20,6 @@ interface ScenicGalleryTileProps {
 
 export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
   const [ previewUri, setPreviewUri ] = useState<string>();
-  const [ tileHovered, setTileHovered ] = useState<boolean>(false);
 
   const galleryPagePath = `${props.jcdProject.route}`;
 
@@ -36,15 +35,11 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
   }, [ props.jcdProject ]);
 
   return (
-    <div className="scenic-gallery-tile"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="scenic-gallery-tile">
       <div className="image-preview">
         {previewUri && (
           <img
             src={previewUri}
-            className={tileHovered ? 'hovered' : ''}
           />
         )}
       </div>
@@ -58,12 +53,4 @@ export function ScenicGalleryTile(props: ScenicGalleryTileProps) {
       </Link>
     </div>
   );
-
-  function handleMouseEnter() {
-    setTileHovered(true);
-  }
-
-  function handleMouseLeave() {
-    setTileHovered(false);
-  }
 }

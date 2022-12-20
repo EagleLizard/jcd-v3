@@ -17,22 +17,24 @@ export function JcdProjectRow(props: JcdProjectRowProps) {
 
   return (
     <div className="jcd-project-row">
-      <div className={`jcd-project-row ${projectRowClassName}`}>
-        {scenicRowPattern.jcdProjects.map(jcdProject => {
-          return (
-            <div
-              className="jcd-project-row-item"
-              key={jcdProject.projectKey}
-              onClick={() => {
-                handleScenicGalleryTileClick(jcdProject);
-              }}
-            >
-              <ScenicGalleryTile
-                jcdProject={jcdProject}
-              />
-            </div>
-          );
-        })}
+      <div className="jcd-project-row-content">
+        <div className={`jcd-project-row-items-container ${projectRowClassName}`}>
+          {scenicRowPattern.jcdProjects.map(jcdProject => {
+            return (
+              <div
+                className="jcd-project-row-item"
+                key={jcdProject.projectKey}
+                onClick={() => {
+                  handleScenicGalleryTileClick(jcdProject);
+                }}
+              >
+                <ScenicGalleryTile
+                  jcdProject={jcdProject}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

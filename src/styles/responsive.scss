@@ -20,12 +20,15 @@ $wide-screen-min-width: 1312px;
 
 @mixin screenSizeSmall {
   @media only screen
-    and (
-      (
-        (min-width: ($phone-sceen-max-device-width + 1px))
-        or (min-device-width: ($phone-sceen-max-device-width + 1px))
-      )
-      and (max-width: ($medium-screen-min-width - 1px))
+    // and (
+    //   (
+    //     (min-width: ($phone-sceen-max-device-width + 1px))
+    //     or (min-device-width: ($phone-sceen-max-device-width + 1px))
+    //   )
+    //   and (max-width: ($medium-screen-min-width - 1px))
+    // ) {
+      
+      and (max-width: ($medium-screen-min-width - 1px)
     ) {
     @content;
   }
