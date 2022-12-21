@@ -149,6 +149,7 @@ $info-container-padding: 30px;
       flex-basis: 0px;
       flex-grow: 1;
       overflow-y: hidden;
+      overflow-x: hidden;
       img {
         min-width: 100%;
         object-fit: cover;

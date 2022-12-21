@@ -1,7 +1,7 @@
 
 import './scenic-project-page.scss';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 
 import { JcdV3Project } from '../../../models/jcd-models-v3/jcd-v3-project';
@@ -16,6 +16,8 @@ const TITLE_IMAGE_HEIGHT = Math.round(MAX_HORIZONTAL_RES * 0.8);
 
 const GALLERY_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.4);
 const GALLERY_IMAGE_HEIGHT = Math.round(MAX_HORIZONTAL_RES * 0.4);
+
+const GALLERY_IMAGE_ID_SEARCH_PARAM_KEY = 'galleryImg';
 
 type ScenicProjectPageProps = {
 
@@ -35,6 +37,36 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
   const [ lightboxImageIdx, setLightboxImageIdx ] = useState<number>();
 
   const routeParams = useParams<Record<string, string>>();
+  const navigate = useNavigate();
+  const [ searchParams, setSearchParams ] = useSearchParams();
+
+  useEffect(() => {
+    let imageIdParam: string;
+    let foundGalleryIdx: number;
+    imageIdParam = searchParams.get(GALLERY_IMAGE_ID_SEARCH_PARAM_KEY);
+    if(
+      !imageIdParam
+      || (galleryImages === undefined)
+      || (galleryImages?.length < 1)
+    ) {
+      setLightboxImageIdx(undefined);
+      setLightboxOpen(false);
+      return;
+    }
+    foundGalleryIdx = galleryImages.findIndex(galleryImage => {
+      return galleryImage.id === imageIdParam;
+    });
+    if(foundGalleryIdx === -1) {
+      setLightboxImageIdx(undefined);
+      setLightboxOpen(false);
+      return;
+    }
+    setLightboxImageIdx(foundGalleryIdx);
+    setLightboxOpen(true);
+  }, [
+    searchParams,
+    galleryImages,
+  ]);
 
   useEffect(() => {
     let nextProjectRoute: string;
@@ -283,7 +315,8 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
   }
 
   function handleImageWrapperClick(jcdProjectImage: JcdV3Image) {
-    let nextLightboxOpen: boolean;
+    let nextSearchParams: URLSearchParams;
+    let replaceHistory: boolean;
     let foundGalleryIdx: number;
     foundGalleryIdx = galleryImages.findIndex(galleryImage => {
       return galleryImage.id === jcdProjectImage.id;
@@ -291,15 +324,18 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
     if(foundGalleryIdx === -1) {
       return;
     }
-    nextLightboxOpen = true;
-    setLightboxImageIdx(foundGalleryIdx);
-    setLightboxOpen(nextLightboxOpen);
+    nextSearchParams = new URLSearchParams({
+      [GALLERY_IMAGE_ID_SEARCH_PARAM_KEY]: galleryImages[foundGalleryIdx].id,
+    });
+    replaceHistory = !!searchParams.get(GALLERY_IMAGE_ID_SEARCH_PARAM_KEY);
+    setSearchParams(nextSearchParams, {
+      replace: replaceHistory,
+    });
   }
 
   function handleLightboxOnClose() {
-    let nextLightboxOpen: boolean;
-    nextLightboxOpen = false;
     setLightboxImageIdx(undefined);
-    setLightboxOpen(nextLightboxOpen);
+    setLightboxOpen(false);
+    navigate(-1);
   }
 }

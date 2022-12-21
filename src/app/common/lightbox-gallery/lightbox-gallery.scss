@@ -1,5 +1,6 @@
 
 .lightbox-gallery {
+  position: relative;
   .lightbox-gallery-image-container {
     display: flex;
     .lightbox-gallery-image {
@@ -9,6 +10,67 @@
         max-height: 85vh;
         &.image-loading {
           display: none; 
+        }
+      }
+    }
+  }
+  .lightbox-gallery-overlay {
+    .overlay-close-control-container {
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      .overlay-close-control {
+        cursor: pointer;
+        .overlay-control-icon {
+          color: #FFF;
+          font-size: 40px;
+          opacity: 0.65;
+          transition: opacity 0.3s ease;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    .overlay-seek-controls-container {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      .overlay-control-icon {
+        font-size: 90px;
+        color: #FFF;
+        opacity: 0.25;
+        transition: opacity 0.3s ease;
+      }
+      .overlay-control-seek-left,
+      .overlay-control-seek-right {
+        cursor: pointer;
+        overflow: hidden;
+        &:hover {
+          .overlay-control-icon {
+            opacity: 0.85;
+          }
+        }
+      }
+      .overlay-control-seek-left {
+        flex: 5 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .overlay-control-icon {
+          margin-left: -15px;
+        }
+      }
+      .overlay-control-seek-right {
+        flex: 7 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        .overlay-control-icon {
+          margin-right: -15px;
         }
       }
     }
