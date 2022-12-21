@@ -218,8 +218,24 @@ $info-container-padding: 30px;
   @include screenSizePhone {
     .gallery-images-section {
       .gallery-image-container {
+        // &:nth-child(1n) {
+        //   width: 100%;
+        // }
+
         &:nth-child(1n) {
-          width: 100%;
+          width: 40vw;
+        }
+        &:nth-child(2n) {
+          width: 40vw;
+        }
+        &:nth-child(3n) {
+          width: 60vw;
+        }
+        &:nth-child(4n) {
+          width: 40vw;
+        }
+        &:nth-child(6n) {
+          width: 60vw;
         }
       }
     }
