@@ -28,15 +28,37 @@ export function TopNav(props: TopNavProps) {
 
   return (
     <div className="top-nav">
-      <Link to="/">
-        <div className="logo-image">
-          {logoUri && (
-            <img
-              src={logoUri}
-            />
-          )}
+      <div className="top-nav-container">
+        <Link
+          to="/"
+          className="logo-image-link"
+        >
+          <div className="logo-image">
+            {logoUri && (
+              <img
+                src={logoUri}
+              />
+            )}
+          </div>
+        </Link>
+        <div className="top-nav-links">
+          etc
         </div>
-      </Link>
+      </div>
+      <div className="dev-screen-size">
+        <div className="screen wide">
+            wide
+        </div>
+        <div className="screen medium">
+            medium
+        </div>
+        <div className="screen small">
+            small
+        </div>
+        <div className="screen phone">
+            phone
+        </div>
+      </div>
     </div>
   );
 }

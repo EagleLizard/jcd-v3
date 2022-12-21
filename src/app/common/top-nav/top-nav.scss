@@ -1,15 +1,47 @@
 
-@import '../../../styles//mixins.scss';
+@import '../../../styles/responsive.scss';
 
 .top-nav {
-  position: relative;
-  height: 100%;
-  a {
-    .logo-image {
+  .top-nav-container {
+    display: flex;
+    .logo-image-link {
+      display: flex;
+      .logo-image {
+        display: flex;
+      }
+    }
+    .top-nav-links-container {
+
+    }
+  }
+  .dev-screen-size {
+    position: absolute;
+    top: 100%;
+    
+    div.screen {
+      padding: 1px;
+      border: 1px dotted;
+      font-size: 14px;
       display: inline-block;
-      height: 100%;
-      img {
-        max-height: 100%;
+    }
+    @include screenSizeWide {
+      .screen.wide {
+        background-color: chartreuse;
+      }
+    }
+    @include screenSizeMedium {
+      .screen.medium {
+        background-color: chartreuse;
+      }
+    }
+    @include screenSizeSmall {
+      .screen.small {
+        background-color: chartreuse;
+      }
+    }
+    @include screenSizePhone {
+      .screen.phone {
+        background-color: chartreuse;
       }
     }
   }
