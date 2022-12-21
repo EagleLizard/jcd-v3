@@ -12,11 +12,11 @@ const scrollPosition = {
   scrollTop: 0,
 };
 
-interface SceneryPageProps {
+interface ScenicPageProps {
 
 }
 
-export function ScenicPage(props: SceneryPageProps) {
+export function ScenicPage(props: ScenicPageProps) {
   const [ jcdProjectPreviews, setJcdProjectPreviews ] = useState<JcdV3ProjectPreview[]>([]);
   const [ isLoadingProjects, setIsLoadingProjects ] = useState<boolean>(true);
   const [ scenicRowPatterns, setScenicRowPatterns ] = useState<ScenicRowPattern[]>();
