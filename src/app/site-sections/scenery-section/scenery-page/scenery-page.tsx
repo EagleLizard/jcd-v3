@@ -6,7 +6,7 @@ import { JcdProjectRow } from './jcd-project-row/jcd-project-row';
 import { JcdV3Service } from '../../../services/jcd-v3-service';
 import { JcdV3ProjectPreview } from '../../../models/jcd-models-v3/jcd-v3-project-preview';
 
-export const SCENERY_SECTION_ROUTE = 'scenery';
+export const SCENERY_SECTION_ROUTE = 'scenic';
 
 const scrollPosition = {
   scrollTop: 0,
@@ -16,7 +16,7 @@ interface SceneryPageProps {
 
 }
 
-export function SceneryPage(props: SceneryPageProps) {
+export function ScenicPage(props: SceneryPageProps) {
   const [ jcdProjectPreviews, setJcdProjectPreviews ] = useState<JcdV3ProjectPreview[]>([]);
   const [ isLoadingProjects, setIsLoadingProjects ] = useState<boolean>(true);
   const [ scenicRowPatterns, setScenicRowPatterns ] = useState<ScenicRowPattern[]>();

@@ -7,6 +7,7 @@ type LightboxModalProps = {
   open: boolean;
   onClose: () => void;
   children?: React.ReactNode;
+  onKeyDown?: ($e: React.KeyboardEvent) => void;
 };
 
 export function LightboxModal(props: LightboxModalProps) {
@@ -18,7 +19,7 @@ export function LightboxModal(props: LightboxModalProps) {
       }}
       open={props.open}
       onClose={handleOnClose}
-
+      onKeyDown={props.onKeyDown}
     >
       <div className="lightbox-modal-body">
         {

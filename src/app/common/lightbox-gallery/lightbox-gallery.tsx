@@ -20,14 +20,29 @@ type LighboxGalleryProps = {
   selectedImageIdx: number;
   open: boolean;
   onClose: () => void;
+  onSeekNext: () => void;
+  onSeekBack: () => void;
 }
 
 export function LighboxGallery(props: LighboxGalleryProps) {
   const [ isImageLoaded, setIsImageLoaded ] = useState<boolean>(false);
+  const [ currImageIdx, setCurrImageIdx ] = useState<number>();
   const [ selectedImage, setSelectedImage ] = useState<JcdV3Image>();
 
+
   useEffect(() => {
-    setSelectedImage(props.jcdImages[props.selectedImageIdx]);
+    let nextSelectedImage: JcdV3Image;
+    nextSelectedImage = props.jcdImages[currImageIdx];
+    setSelectedImage(nextSelectedImage);
+  }, [
+    currImageIdx,
+  ]);
+
+  useEffect(() => {
+    if(currImageIdx !== props.selectedImageIdx) {
+      setCurrImageIdx(props.selectedImageIdx);
+      setIsImageLoaded(false);
+    }
   }, [
     props.selectedImageIdx
   ]);
@@ -44,6 +59,7 @@ export function LighboxGallery(props: LighboxGalleryProps) {
     <LightboxModal
       open={props.open}
       onClose={handleOnClose}
+      onKeyDown={hanldeKeyDown}
     >
       <div className="lightbox-gallery">
         <div className="lightbox-gallery-image-container">
@@ -82,12 +98,22 @@ export function LighboxGallery(props: LighboxGalleryProps) {
               </div>
             </div>
             <div className="overlay-seek-controls-container">
-              <div className="overlay-control-seek-left">
+              <div
+                className="overlay-control-seek-left"
+                onClick={() => {
+                  props.onSeekBack();
+                }}
+              >
                 <ChevronLeftIcon
                   className="overlay-control-icon"
                 />
               </div>
-              <div className="overlay-control-seek-right">
+              <div
+                className="overlay-control-seek-right"
+                onClick={() => {
+                  props.onSeekNext();
+                }}
+              >
                 <ChevronRightIcon
                   className="overlay-control-icon"
                 />
@@ -99,12 +125,22 @@ export function LighboxGallery(props: LighboxGalleryProps) {
     </LightboxModal>
   );
 
+  function hanldeKeyDown($e: React.KeyboardEvent) {
+    switch($e.key) {
+      case 'ArrowLeft':
+        props.onSeekBack();
+        break;
+      case 'ArrowRight':
+        props.onSeekNext();
+        break;
+    }
+  }
+
   function handleImageOnLoad() {
     setIsImageLoaded(true);
   }
 
   function handleOnClose() {
-    console.log('LightboxGallery handleOnClose()');
     props.onClose();
   }
 }

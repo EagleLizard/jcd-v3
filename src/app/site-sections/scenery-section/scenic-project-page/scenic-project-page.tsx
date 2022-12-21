@@ -120,6 +120,8 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
           selectedImageIdx={lightboxImageIdx}
           open={lightboxOpen}
           onClose={handleLightboxOnClose}
+          onSeekNext={handleLightboxSeekNext}
+          onSeekBack={handleLightboxSeekBack}
         />
       )}
       <div className="title-section">
@@ -180,7 +182,7 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
             <div
               className="title-image-container lightbox-image-wrapper"
               onClick={() => {
-                handleImageWrapperClick(titleImage);
+                handleImageSelect(titleImage);
               }}
             >
               <img
@@ -206,7 +208,7 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
             <div
               className="title-image-container lightbox-image-wrapper"
               onClick={() => {
-                handleImageWrapperClick(headingImage);
+                handleImageSelect(headingImage);
               }}
             >
               <img
@@ -285,7 +287,7 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
               <div
                 className="gallery-image lightbox-image-wrapper"
                 onClick={() => {
-                  handleImageWrapperClick(galleryImage);
+                  handleImageSelect(galleryImage);
                 }}
               >
                 <img
@@ -314,7 +316,7 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
     setJcdProjectImages(nextJcdV3ProjectImages);
   }
 
-  function handleImageWrapperClick(jcdProjectImage: JcdV3Image) {
+  function handleImageSelect(jcdProjectImage: JcdV3Image) {
     let nextSearchParams: URLSearchParams;
     let replaceHistory: boolean;
     let foundGalleryIdx: number;
@@ -338,4 +340,45 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
     setLightboxOpen(false);
     navigate(-1);
   }
+
+  function handleLightboxSeekNext() {
+    let currJcdProjectImage: JcdV3Image, nextProjectImage: JcdV3Image;
+    let nextIdx: number;
+    let foundGalleryIdx: number;
+    currJcdProjectImage = galleryImages[lightboxImageIdx];
+    foundGalleryIdx = galleryImages.findIndex(galleryImage => {
+      return galleryImage.id === currJcdProjectImage.id;
+    });
+    if(foundGalleryIdx === -1) {
+      return;
+    }
+    console.log('onSeekNext');
+    nextIdx = (foundGalleryIdx >= (galleryImages.length - 1))
+      ? 0
+      : foundGalleryIdx + 1
+    ;
+    nextProjectImage = galleryImages[nextIdx];
+    handleImageSelect(nextProjectImage);
+  }
+
+  function handleLightboxSeekBack() {
+    let currJcdProjectImage: JcdV3Image, nextProjectImage: JcdV3Image;
+    let prevIdx: number;
+    let foundGalleryIdx: number;
+    currJcdProjectImage = galleryImages[lightboxImageIdx];
+    foundGalleryIdx = galleryImages.findIndex(galleryImage => {
+      return galleryImage.id === currJcdProjectImage.id;
+    });
+    if(foundGalleryIdx === -1) {
+      return;
+    }
+    console.log('onSeekBack');
+    prevIdx = (foundGalleryIdx <= 0)
+      ? galleryImages.length - 1
+      : foundGalleryIdx - 1
+    ;
+    nextProjectImage = galleryImages[prevIdx];
+    handleImageSelect(nextProjectImage);
+  }
+
 }
