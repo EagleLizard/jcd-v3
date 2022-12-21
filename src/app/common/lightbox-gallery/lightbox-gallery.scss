@@ -1,4 +1,6 @@
 
+@import '../../../styles/responsive.scss';
+
 .lightbox-gallery {
   position: relative;
   .lightbox-gallery-image-container {
@@ -71,6 +73,25 @@
         align-items: center;
         .overlay-control-icon {
           margin-right: -15px;
+        }
+      }
+    }
+  }
+  @include screenSizePhone {
+    .lightbox-gallery-overlay {
+      .overlay-seek-controls-container {
+        .overlay-control-icon {
+          font-size: 55px;
+        }
+        .overlay-control-seek-left {
+          .overlay-control-icon {
+            margin-left: -5px;
+          }
+        }
+        .overlay-control-seek-right {
+          .overlay-control-icon {
+            margin-right: -5px;
+          }
         }
       }
     }
