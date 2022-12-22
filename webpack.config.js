@@ -17,7 +17,9 @@ module.exports = (env, argv) => {
     template: './src/index.html',
     filename: './index.html',
   });
-  const miniCssExtractPlugin = new MiniCssExtractPlugin();
+  const miniCssExtractPlugin = new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css',
+  });
   const forkTsCheckerWebpackPlugin = new ForkTsCheckerWebpackPlugin();
   const terserPlugin = new TerserPlugin({
     extractComments: false,
@@ -47,6 +49,13 @@ module.exports = (env, argv) => {
             name: 'vendors',
             chunks: 'all',
           },
+          vendorStyles: {
+            test: /[\\/]node_modules[\\/]/,
+            type: 'css/mini-extract',
+            name: 'vendor-styles',
+            chunks: 'all',
+            enforce: true,
+          }
         }
       },
     },
