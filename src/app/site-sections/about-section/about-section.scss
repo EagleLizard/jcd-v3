@@ -3,6 +3,8 @@
 @import '../../../styles/responsive.scss';
 
 .about-page {
+  background-color: $jcd-background-color-secondary;
+  color: $jcd-font-color-secondary;
   max-width: 100%;
   .about-page-container {
     display: flex;

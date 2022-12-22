@@ -25,6 +25,7 @@
       flex-direction: column;
       flex-grow: 1;
       width: 20vw;
+      max-width: 20vw;
       height: 20vw;
 
       position: relative;
@@ -46,7 +47,40 @@
     }
   }
 
-  
+  @include screenSizeSmall {
+    .art-section-heading {
+      padding: 35px 25px;
+      .header-text {
+        font-size: $font-xlg;
+      }
+      .content-text {
+        font-size: $font-md;
+      }
+    }
+    .art-gallery-section
+    .gallery-image-container {
+      width: 25vw;
+      height: 25vw;
+      max-width: 25vw;
+    }
+  }
+  @include screenSizePhone {
+    .art-section-heading {
+      padding: 30px 20px;
+      .header-text {
+        font-size: $font-lg;
+      }
+      .content-text {
+        font-size: $font-xs;
+      }
+    }
+    .art-gallery-section
+    .gallery-image-container {
+      width: calc(100vw / 3);
+      height: calc(100vw / 3);
+      max-width: calc(100vw / 3);
+    }
+  }
 
   .lightbox-image-wrapper {
     cursor: pointer;

@@ -1,8 +1,11 @@
 
 @import './fonts/index.scss';
+@import './app/global.scss';
 
 body {
-  font-family: Arial, sans-serif;  
+  font-family: 'Roboto', sans-serif;
+  color: $jcd-font-color-primary;
+  background-color: $jcd-background-color-primary;
 }
 html body {
   margin: 0;

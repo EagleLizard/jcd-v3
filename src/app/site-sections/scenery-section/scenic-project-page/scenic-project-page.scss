@@ -23,6 +23,7 @@ $info-container-padding: 30px;
       padding: $info-container-padding;
       .project-title {
         font-size: $font-xlg;
+        font-family: 'Roboto Condensed', sans-serif;
         text-transform: uppercase;
         font-weight: 700;
       }
@@ -40,8 +41,9 @@ $info-container-padding: 30px;
         font-size: $font-sm;
       }
       .project-date {
-        padding-top: $info-sections-vertical-padding;
+        font-family: 'Roboto Condensed', sans-serif;
         text-transform: uppercase;
+        padding-top: $info-sections-vertical-padding;
         font-size: $font-lg;
       }
       .project-description-container {

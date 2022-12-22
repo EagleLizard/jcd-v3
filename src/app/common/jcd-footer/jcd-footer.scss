@@ -1,0 +1,36 @@
+
+@import '../../global.scss';
+@import '../../../styles/responsive.scss';
+
+.jcd-footer {
+  display: flex;
+  width: 100%;
+  height: $footer-height;
+  .jcd-footer-item {
+    flex: 1 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.footer-left {
+      justify-content: flex-start;
+    }
+    &.footer-right {
+      justify-content: flex-end;
+    }
+
+    .footer-item-content {
+      padding: 0 30px;
+      font-size: $font-md;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  }
+  a.email-link {
+    color: inherit;
+    &:hover {
+      color: $highlight-font-color;
+    }
+  }
+
+}

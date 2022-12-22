@@ -1,5 +1,5 @@
 
-import './scenery-page.scss';
+import './scenic-page.scss';
 import React, { useEffect, useState } from 'react';
 import { ScenicPageService, ScenicRowPattern } from '../scenic-page-service';
 import { JcdProjectRow } from './jcd-project-row/jcd-project-row';

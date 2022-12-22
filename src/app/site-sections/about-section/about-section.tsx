@@ -14,7 +14,7 @@ const ABOUT_IMAGE_BUCKET_FILES: string[] = [
   'janice/janice-chan-1.jpg',
   'janice/janice-chan-2.jpg',
   'janice/janice-chan-3.jpg',
-  'janice/bio-logo.png',
+  'janice/bio-logo-light.png',
 ];
 
 type AboutSectionProps = {
@@ -83,6 +83,8 @@ export function AboutSection(props: AboutSectionProps) {
                 <a
                   className="email-link"
                   href="mailto:contact@janicechan.design"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   contact@janicechan.design
                 </a>

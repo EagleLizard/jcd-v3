@@ -8,7 +8,7 @@ import { JCD_V3_LOGO_BUCKET_FILE, LOGO } from '../../constants/image-uris';
 import { getResizedUri } from '../../services/gallery-service';
 import { ART_SECTION_ROUTE } from '../../site-sections/art-section/art-section';
 import { ABOUT_SECTION_ROUTE } from '../../site-sections/about-section/about-section';
-import { SCENERY_SECTION_ROUTE } from '../../site-sections/scenery-section/scenery-page/scenery-page';
+import { SCENERY_SECTION_ROUTE } from '../../site-sections/scenery-section/scenic-page/scenic-page';
 import { JcdV3Service } from '../../services/jcd-v3-service';
 
 const LOGO_BASE_WIDTH = 500;

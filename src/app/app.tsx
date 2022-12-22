@@ -5,11 +5,12 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 import { ScenerySection } from './site-sections/scenery-section/scenery-section';
-import { SCENERY_SECTION_ROUTE } from './site-sections/scenery-section/scenery-page/scenery-page';
+import { SCENERY_SECTION_ROUTE } from './site-sections/scenery-section/scenic-page/scenic-page';
 import { TopNav, TOP_NAV_LINKS } from './common/top-nav/top-nav';
 import { ArtSection, ART_SECTION_ROUTE } from './site-sections/art-section/art-section';
 import { AboutSection, ABOUT_SECTION_ROUTE } from './site-sections/about-section/about-section';
 import { Link } from 'react-router-dom';
+import { JcdFooter } from './common/jcd-footer/jcd-footer';
 
 interface AppProps {
 
@@ -28,6 +29,9 @@ export function JcdApp(props: AppProps) {
       </div>
       <div className="app-content-container">
         <JcdAppRouter/>
+      </div>
+      <div className="footer-container">
+        <JcdFooter/>
       </div>
       <SwipeableDrawer
         anchor="right"

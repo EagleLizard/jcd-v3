@@ -10,8 +10,10 @@ import { LighboxGallery } from '../../common/lightbox-gallery/lightbox-gallery';
 
 export const ART_SECTION_ROUTE = 'art';
 
-const ART_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.25);
-const ART_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.25);
+const ART_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.3);
+const ART_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.4);
+
+const MAX_CONCURRENT_IMAGES_TO_LOAD = 8;
 
 type ArtSectionProps = {
 
@@ -21,7 +23,10 @@ export function ArtSection(props: ArtSectionProps) {
   const [ galleryImages, setGalleryImages ] = useState<JcdV3Image[]>();
 
   const [ lightboxOpen, setLightboxOpen ] = useState<boolean>(false);
-  const [ lightboxImageIdx, setLightboxImageIdx ] = useState<number>();
+  const [ lightboxImageIdx, setLightboxImageIdx ] = useState<number>(0);
+
+  const [ unloadedImages, setUnloadedImages ] = useState<JcdV3Image[]>();
+  const [ imagesToLoad, setImagesToLoad ] = useState<JcdV3Image[]>([]);
 
   const routeParams = useParams<Record<string, string>>();
   const navigate = useNavigate();
@@ -52,6 +57,44 @@ export function ArtSection(props: ArtSectionProps) {
     setLightboxOpen(true);
   }, [
     searchParams,
+    galleryImages,
+  ]);
+
+  useEffect(() => {
+    let nextImagesToLoad: JcdV3Image[], numNextUnloadedImages: number;
+    let imagesToAddToLoad: JcdV3Image[], nextUnloadedImages: JcdV3Image[];
+    if(
+      (unloadedImages === undefined)
+      || (unloadedImages?.length < 1)
+    ) {
+      return;
+    }
+    if(imagesToLoad.length < MAX_CONCURRENT_IMAGES_TO_LOAD) {
+      numNextUnloadedImages = MAX_CONCURRENT_IMAGES_TO_LOAD - imagesToLoad.length;
+    }
+
+    imagesToAddToLoad = unloadedImages.slice(0, numNextUnloadedImages);
+    nextImagesToLoad = [
+      ...imagesToLoad,
+      ...imagesToAddToLoad,
+    ];
+    setImagesToLoad(nextImagesToLoad);
+
+  }, [
+    unloadedImages,
+  ]);
+
+  useEffect(() => {
+    let nextUnloadedImages: JcdV3Image[];
+    if(
+      (galleryImages === undefined)
+      || (galleryImages?.length < 1)
+    ) {
+      return;
+    }
+    nextUnloadedImages = galleryImages.slice();
+    setUnloadedImages(nextUnloadedImages);
+  }, [
     galleryImages,
   ]);
 
@@ -94,15 +137,30 @@ export function ArtSection(props: ArtSectionProps) {
                   handleImageSelect(galleryImage);
                 }}
               >
-                <img
-                  src={
-                    getResizedUri({
-                      uri: JcdV3Service.getImageUri(galleryImage.bucketFile),
-                      width: ART_IMAGE_WIDTH,
-                      height: ART_IMAGE_HEIGHT,
-                    })
-                  }
-                />
+                {(
+                  (galleryImage.loaded)
+                  || (
+                    imagesToLoad.find(imageToLoad => {
+                      return imageToLoad.id === galleryImage.id;
+                    }) !== undefined
+                  )
+                ) && (
+                  <img
+                    src={
+                      getResizedUri({
+                        uri: JcdV3Service.getImageUri(galleryImage.bucketFile),
+                        width: ART_IMAGE_WIDTH,
+                        height: ART_IMAGE_HEIGHT,
+                      })
+                    }
+                    onLoad={() => {
+                      handleImageLoaded(galleryImage);
+                    }}
+                    onError={() => {
+                      handleImageLoaded(galleryImage);
+                    }}
+                  />
+                )}
               </div>
             </div>
           );
@@ -116,6 +174,25 @@ export function ArtSection(props: ArtSectionProps) {
     let nextJcdArtImages: JcdV3Image[];
     nextJcdArtImages = await JcdV3Service.getProjectImages(JCD_V3_ART_PROJECT_KEY);
     setGalleryImages(nextJcdArtImages);
+  }
+
+  function handleImageLoaded(loadedImage: JcdV3Image) {
+    let foundUnloadedImageIdx: number, foundImagesToLoadIdx: number;
+    let nextUnloadedImages: JcdV3Image[], nextImagesToLoad: JcdV3Image[];
+    loadedImage.loaded = true;
+    foundImagesToLoadIdx = imagesToLoad.findIndex(imageToLoad => {
+      return imageToLoad.id === loadedImage.id;
+    });
+    foundUnloadedImageIdx = unloadedImages.findIndex(unloadedImage => {
+      return unloadedImage.id === loadedImage.id;
+    });
+    nextUnloadedImages = unloadedImages.slice();
+    nextImagesToLoad = imagesToLoad.slice();
+
+    nextUnloadedImages.splice(foundUnloadedImageIdx, 1);
+    nextImagesToLoad.splice(foundImagesToLoadIdx, 1);
+    setUnloadedImages(nextUnloadedImages);
+    setImagesToLoad(nextImagesToLoad);
   }
 
   function handleImageSelect(jcdProjectImage: JcdV3Image) {

@@ -9,6 +9,7 @@
       display: flex;
       user-select: none;
       img {
+        background-color: #FFF;
         max-width: 85vw;
         max-height: 85vh;
         &.image-loading {

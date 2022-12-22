@@ -1,8 +1,6 @@
 
 @import './global.scss';
 
-$top-nav-height: 64px;
-
 .app-main {
   .header-text {
     font-size: 24px;
@@ -16,18 +14,24 @@ $top-nav-height: 64px;
     bottom: $top-nav-height;
     min-height: $top-nav-height;
     max-height: $top-nav-height;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: $jcd-background-color-primary;
     z-index: 1;
     // box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2);
   }
   .app-content-container {
     padding-top: $top-nav-height + 0px;
   }
+  .footer-container {
+    min-height: $footer-height;
+  }
 }
 
 .jcd-drawer-nav {
   width: 30vw;
   padding: 10px 10px;
+  height: 100%;
+  background-color: $jcd-background-color-primary;
+  color: $jcd-font-color-primary;
   .drawer-nav-list-item {
     display: flex;
     a.drawer-nav-link {

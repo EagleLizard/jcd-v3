@@ -16,6 +16,9 @@ enum JCD_V3_IMAGE_TYPE_ENUM {
 type JcdV3ImageType = `${JCD_V3_IMAGE_TYPE_ENUM}`;
 
 export class JcdV3Image {
+
+  public loaded: boolean;
+
   constructor(
     public id: string,
     public projectKey: string,
@@ -23,7 +26,9 @@ export class JcdV3Image {
     public orderIdx: number,
     public active: boolean,
     public imageType: JcdV3ImageType,
-  ) {}
+  ) {
+    this.loaded = false;
+  }
 
   static deserialize(rawImg: unknown): JcdV3Image {
     let jcdV3Image: Record<string, unknown>;
