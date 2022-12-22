@@ -16,6 +16,7 @@ module.exports = (env, argv) => {
   const htmlPlugin = new HtmlWebPackPlugin({
     template: './src/index.html',
     filename: './index.html',
+    favicon: './src/favicon.ico'
   });
   const miniCssExtractPlugin = new MiniCssExtractPlugin({
     filename: '[name].[contenthash].css',
