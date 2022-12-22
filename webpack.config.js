@@ -4,6 +4,7 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
 
@@ -18,6 +19,9 @@ module.exports = (env, argv) => {
   });
   const miniCssExtractPlugin = new MiniCssExtractPlugin();
   const forkTsCheckerWebpackPlugin = new ForkTsCheckerWebpackPlugin();
+  const terserPlugin = new TerserPlugin({
+    extractComments: false,
+  });
 
   webpackConfig = {
     entry: path.resolve(__dirname, 'src/main.tsx'),
@@ -30,6 +34,10 @@ module.exports = (env, argv) => {
       clean: true,
     },
     optimization: {
+      minimize: isDevelopment ? false : true,
+      minimizer: [
+        terserPlugin,
+      ],
       moduleIds: 'deterministic',
       runtimeChunk: 'single',
       splitChunks: {
