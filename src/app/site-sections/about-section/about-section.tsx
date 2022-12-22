@@ -47,7 +47,7 @@ export function AboutSection(props: AboutSectionProps) {
 
           <div className="about-content-section">
             <div className="heading-text text-content">
-              Janice Chan is a scenic designer based in Utah County, USA,
+              Janice Chan is a scenic designer based in Utah Valley, USA,
             </div>
             <div className="text-content">
               highly driven by unconventional storytelling and informed by stylised art forms and surrealism. She holds a B.F.A. in Theatre Arts: Scenic Design from Utah Valley University, where she earned the Outstanding Student Award from the School of the Arts.
