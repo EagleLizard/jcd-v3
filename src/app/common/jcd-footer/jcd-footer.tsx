@@ -10,11 +10,21 @@ export function JcdFooter(props: JcdFooterProps) {
   return (
     <div className="jcd-footer">
       <div className="jcd-footer-item footer-left">
-        <div className="footer-item-content">
-          janicechan.design
+        <div className="footer-item-content footer-site">
+          <div className="breakable-footer-item">
+            <div className="breakable-content">
+              janice
+            </div>
+            <div className="breakable-content">
+              chan
+            </div>
+            <div className="breakable-content">
+              .design
+            </div>
+          </div>
         </div>
       </div>
-      <div className="jcd-footer-item">
+      <div className="jcd-footer-item footer-middle">
         <div className="footer-item-content">
           © 2024 Janice Chan Designs
         </div>
@@ -27,7 +37,17 @@ export function JcdFooter(props: JcdFooterProps) {
             target="_blank"
             rel="noreferrer"
           >
-            contact@janicechan.design
+            <div className="breakable-footer-item">
+              <div className="breakable-content">
+                contact
+              </div>
+              <div className="breakable-content">
+                @janicechan
+              </div>
+              <div className="breakable-content">
+                .design
+              </div>
+            </div>
           </a>
         </div>
       </div>

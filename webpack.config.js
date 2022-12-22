@@ -5,7 +5,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const DIST_DIR = path.resolve(__dirname, 'public');
+const DIST_DIR = path.resolve(__dirname, 'dist');
 
 module.exports = (env, argv) => {
   let webpackConfig;
