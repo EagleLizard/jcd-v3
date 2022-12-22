@@ -1,10 +1,15 @@
 
 import './app.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+
 import { ScenerySection } from './site-sections/scenery-section/scenery-section';
 import { SCENERY_SECTION_ROUTE } from './site-sections/scenery-section/scenery-page/scenery-page';
-import { TopNav } from './common/top-nav/top-nav';
+import { TopNav, TOP_NAV_LINKS } from './common/top-nav/top-nav';
+import { ArtSection, ART_SECTION_ROUTE } from './site-sections/art-section/art-section';
+import { AboutSection, ABOUT_SECTION_ROUTE } from './site-sections/about-section/about-section';
+import { Link } from 'react-router-dom';
 
 interface AppProps {
 
@@ -12,16 +17,58 @@ interface AppProps {
 
 export function JcdApp(props: AppProps) {
 
+  const [ drawerOpen, setDrawerOpen ] = useState<boolean>(false);
+
   return (
     <div className="app-main">
       <div className="top-nav-container">
-        <TopNav/>
+        <TopNav
+          onMenuIconClick={handleMenuIconClick}
+        />
       </div>
       <div className="app-content-container">
         <JcdAppRouter/>
       </div>
+      <SwipeableDrawer
+        anchor="right"
+        onClose={handleDrawerClose}
+        onOpen={handleDrawerOpen}
+        open={drawerOpen}
+      >
+        <div className="jcd-drawer-nav">
+          {TOP_NAV_LINKS.map((navLink, idx) => {
+            return (
+              <div
+                key={idx}
+                className="drawer-nav-list-item"
+              >
+                <Link
+                  to={navLink.route}
+                  onClick={() => {
+                    setDrawerOpen(false);
+                  }}
+                  className="drawer-nav-link"
+                >
+                  <div className="nav-link-label">
+                    {navLink.label}
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </SwipeableDrawer>
     </div>
   );
+  function handleDrawerOpen() {
+    setDrawerOpen(true);
+  }
+  function handleDrawerClose() {
+    setDrawerOpen(false);
+  }
+  function handleMenuIconClick() {
+    setDrawerOpen(true);
+  }
 }
 
 function JcdAppRouter() {
@@ -32,6 +79,12 @@ function JcdAppRouter() {
       )}/>
       <Route path={`/${SCENERY_SECTION_ROUTE}/*`} element={(
         <ScenerySection/>
+      )}/>
+      <Route path={`/${ART_SECTION_ROUTE}/*`} element={(
+        <ArtSection/>
+      )}/>
+      <Route path={`/${ABOUT_SECTION_ROUTE}/*`} element={(
+        <AboutSection/>
       )}/>
     </Routes>
   );

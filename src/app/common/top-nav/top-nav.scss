@@ -1,22 +1,91 @@
 
+@import '../../global.scss';
 @import '../../../styles/responsive.scss';
 
 .top-nav {
   .top-nav-container {
+    // background-color: chartreuse;
     display: flex;
     .logo-image-link {
+      padding-left: 30px;
       display: flex;
+      &:hover {
+        /*
+        Generated with CSS Filter generator: https://codepen.io/sosuke/pen/Pjoqqp
+          Credit to Barrett Sonntag.
+        Found via stackoverflow: https://stackoverflow.com/a/50942954
+          Credit to Fadi Abo Msalam.
+        */
+        filter: invert(49%) sepia(74%) saturate(3134%) hue-rotate(345deg) brightness(95%) contrast(93%);
+      }
       .logo-image {
         display: flex;
       }
     }
-    .top-nav-links-container {
-
+    .top-nav-links {
+      flex: 1 1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 40px;
+      .top-nav-link-container {
+        &:not(:last-child) {
+          padding-right: 20px;
+        }
+        a.top-nav-link {
+          color: inherit;
+          font-weight: 700;
+          text-transform: uppercase;
+          text-decoration: none;
+          font-size: $font-md;
+          &:hover {
+            color: $highlight-font-color;
+          }
+        }
+      }
+    }
+    .top-nav-drawer-toggle-container {
+      display: none;
+      flex: 1 1;
+      justify-content: flex-end;
+      align-items: center; 
+      .menu-icon-container {
+        padding: 0 20px;
+        cursor: pointer;
+        .menu-toggle-icon {
+          font-size: 30px;
+        }
+      }
+    }
+  }
+  @include screenSizeSmall {
+    .top-nav-container {
+      
+    }
+  }
+  @include screenSizePhone {
+    .top-nav-container {
+      .top-nav-drawer-toggle-container {
+        display: flex;
+      }
+      .top-nav-links {
+        display: none;
+      }
+      .logo-image-link {
+        padding-left: 10px;
+        .logo-image {
+          img {
+            align-self: center;
+            max-height: 80%;
+          }
+        }
+      }
     }
   }
   .dev-screen-size {
     position: absolute;
     top: 100%;
+    user-select: none;
     
     div.screen {
       padding: 1px;

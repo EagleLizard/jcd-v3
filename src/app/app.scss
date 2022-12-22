@@ -1,12 +1,11 @@
 
+@import './global.scss';
+
 $top-nav-height: 64px;
 
 .app-main {
   .header-text {
     font-size: 24px;
-  }
-  .text-content {
-    background-color: rgba(152, 253, 0, 0.5);
   }
   .top-nav-container {
     position: fixed;
@@ -19,9 +18,29 @@ $top-nav-height: 64px;
     max-height: $top-nav-height;
     background-color: rgba(255, 255, 255, 1);
     z-index: 1;
-    box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2);
+    // box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2);
   }
   .app-content-container {
     padding-top: $top-nav-height + 0px;
+  }
+}
+
+.jcd-drawer-nav {
+  width: 30vw;
+  padding: 10px 10px;
+  .drawer-nav-list-item {
+    display: flex;
+    a.drawer-nav-link {
+      padding: 5px 0;
+      flex: 1 1;
+      color: inherit;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-size: $font-mmd;
+      &:hover {
+        color: $highlight-font-color;
+      }
+    }
   }
 }
