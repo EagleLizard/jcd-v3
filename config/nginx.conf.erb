@@ -78,7 +78,7 @@ http {
       # mruby_set $path /app/bin/config/lib/ngx_mruby/routes_path.rb cache;
       # mruby_set $fallback /app/bin/config/lib/ngx_mruby/routes_fallback.rb cache;
 
-      try_files $uri $uri/ =404;
+      try_files $uri $uri/ /index.html;
 
     }
 
