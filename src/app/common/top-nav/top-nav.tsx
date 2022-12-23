@@ -45,6 +45,7 @@ export function TopNav(props: TopNavProps) {
     let resizedLogoUri: string;
     resizedLogoUri = getResizedUri({
       uri: JcdV3Service.getImageUri(JCD_V3_LOGO_BUCKET_FILE),
+      height: 64,
     });
     setLogoUri(resizedLogoUri);
   }, []);

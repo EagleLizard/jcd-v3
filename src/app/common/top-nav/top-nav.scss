@@ -2,6 +2,26 @@
 @import '../../global.scss';
 @import '../../../styles/responsive.scss';
 
+@mixin topNavPhone {
+  .top-nav-container {
+    .top-nav-drawer-toggle-container {
+      display: flex;
+    }
+    .top-nav-links {
+      display: none;
+    }
+    .logo-image-link {
+      padding-left: 10px;
+      .logo-image {
+        img {
+          align-self: center;
+          max-height: 80%;
+        }
+      }
+    }
+  }
+}
+
 .top-nav {
   .top-nav-container {
     // background-color: chartreuse;
@@ -59,28 +79,11 @@
     }
   }
   @include screenSizeSmall {
-    .top-nav-container {
-      
-    }
+    // fix for iphone layout...
+    @include topNavPhone();
   }
   @include screenSizePhone {
-    .top-nav-container {
-      .top-nav-drawer-toggle-container {
-        display: flex;
-      }
-      .top-nav-links {
-        display: none;
-      }
-      .logo-image-link {
-        padding-left: 10px;
-        .logo-image {
-          img {
-            align-self: center;
-            max-height: 80%;
-          }
-        }
-      }
-    }
+    @include topNavPhone();
   }
   .dev-screen-size {
     display: none;
