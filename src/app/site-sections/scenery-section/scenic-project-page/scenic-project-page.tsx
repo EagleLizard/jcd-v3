@@ -255,7 +255,12 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
                       </div>
                     )}
                     <div className="media-and-press-link">
-                      <a href={mediaAndPressItem.link.uri}>
+                      <a
+                        className="media-and-press-link-anchor"
+                        href={mediaAndPressItem.link.uri}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         {mediaAndPressItem.link.label}
                       </a>
                     </div>

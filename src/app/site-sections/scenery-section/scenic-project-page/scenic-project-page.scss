@@ -113,6 +113,12 @@ $info-container-padding: 30px;
 
           .media-and-press-link {
             padding-right: 5px;
+            a.media-and-press-link-anchor {
+              color: inherit;
+              &:hover {
+                color: $highlight-font-color;
+              }
+            }
           }
 
           &:not(:first-child) {
