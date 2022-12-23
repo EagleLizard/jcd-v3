@@ -16,6 +16,8 @@ const MONTH_NAMES = [
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
+const GOOGLE_ANALYTICS_TRACKING_ID = 'G-743G14MMJZ';
+
 export {
   MAX_HORIZONTAL_RES,
   MAX_VERTICAL_RES,
@@ -27,4 +29,5 @@ export {
   MONTH_NAMES,
   JCD_V3_ART_PROJECT_KEY,
   GALLERY_IMAGE_ID_SEARCH_PARAM_KEY,
+  GOOGLE_ANALYTICS_TRACKING_ID,
 };

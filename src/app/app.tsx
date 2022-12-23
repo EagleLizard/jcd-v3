@@ -1,7 +1,7 @@
 
 import './app.scss';
-import React, { useState } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 import { ScenerySection } from './site-sections/scenery-section/scenery-section';
@@ -12,9 +12,9 @@ import { AboutSection, ABOUT_SECTION_ROUTE } from './site-sections/about-section
 import { Link } from 'react-router-dom';
 import { JcdFooter } from './common/jcd-footer/jcd-footer';
 
-interface AppProps {
+type AppProps = {
 
-}
+};
 
 export function JcdApp(props: AppProps) {
 
