@@ -10,10 +10,12 @@ import { LighboxGallery } from '../../common/lightbox-gallery/lightbox-gallery';
 
 export const ART_SECTION_ROUTE = 'art';
 
-const ART_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.3);
-const ART_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.4);
+// const ART_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.3);
+// const ART_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.4);
+const ART_IMAGE_WIDTH = 500;
+const ART_IMAGE_HEIGHT = 400;
 
-const MAX_CONCURRENT_IMAGES_TO_LOAD = 8;
+const MAX_CONCURRENT_IMAGES_TO_LOAD = 3;
 
 type ArtSectionProps = {
 
@@ -24,9 +26,6 @@ export function ArtSection(props: ArtSectionProps) {
 
   const [ lightboxOpen, setLightboxOpen ] = useState<boolean>(false);
   const [ lightboxImageIdx, setLightboxImageIdx ] = useState<number>(0);
-
-  const [ unloadedImages, setUnloadedImages ] = useState<JcdV3Image[]>();
-  const [ imagesToLoad, setImagesToLoad ] = useState<JcdV3Image[]>([]);
 
   const routeParams = useParams<Record<string, string>>();
   const navigate = useNavigate();
@@ -57,44 +56,6 @@ export function ArtSection(props: ArtSectionProps) {
     setLightboxOpen(true);
   }, [
     searchParams,
-    galleryImages,
-  ]);
-
-  useEffect(() => {
-    let nextImagesToLoad: JcdV3Image[], numNextUnloadedImages: number;
-    let imagesToAddToLoad: JcdV3Image[], nextUnloadedImages: JcdV3Image[];
-    if(
-      (unloadedImages === undefined)
-      || (unloadedImages?.length < 1)
-    ) {
-      return;
-    }
-    if(imagesToLoad.length < MAX_CONCURRENT_IMAGES_TO_LOAD) {
-      numNextUnloadedImages = MAX_CONCURRENT_IMAGES_TO_LOAD - imagesToLoad.length;
-    }
-
-    imagesToAddToLoad = unloadedImages.slice(0, numNextUnloadedImages);
-    nextImagesToLoad = [
-      ...imagesToLoad,
-      ...imagesToAddToLoad,
-    ];
-    setImagesToLoad(nextImagesToLoad);
-
-  }, [
-    unloadedImages,
-  ]);
-
-  useEffect(() => {
-    let nextUnloadedImages: JcdV3Image[];
-    if(
-      (galleryImages === undefined)
-      || (galleryImages?.length < 1)
-    ) {
-      return;
-    }
-    nextUnloadedImages = galleryImages.slice();
-    setUnloadedImages(nextUnloadedImages);
-  }, [
     galleryImages,
   ]);
 
@@ -138,12 +99,8 @@ export function ArtSection(props: ArtSectionProps) {
                 }}
               >
                 {(
-                  (galleryImage.loaded)
-                  || (
-                    imagesToLoad.find(imageToLoad => {
-                      return imageToLoad.id === galleryImage.id;
-                    }) !== undefined
-                  )
+                  galleryImage.load
+                  || galleryImage.loaded
                 ) && (
                   <img
                     src={
@@ -170,29 +127,62 @@ export function ArtSection(props: ArtSectionProps) {
     </div>
   );
 
-  async function initArtPage() {
-    let nextJcdArtImages: JcdV3Image[];
-    nextJcdArtImages = await JcdV3Service.getProjectImages(JCD_V3_ART_PROJECT_KEY);
-    setGalleryImages(nextJcdArtImages);
+  function setImagesToLoad(nextGalleryImages: JcdV3Image[]) {
+    let numImagesLoading: number, numToStartLoading: number;
+    if(
+      (nextGalleryImages === undefined)
+      || (nextGalleryImages.length < 1)
+    ) {
+      return;
+    }
+    numImagesLoading = 0;
+    nextGalleryImages.forEach(galleryImage => {
+      if(galleryImage.load && !galleryImage.loaded) {
+        numImagesLoading++;
+      }
+    });
+
+    numToStartLoading = 0;
+    if(numImagesLoading < MAX_CONCURRENT_IMAGES_TO_LOAD) {
+      numToStartLoading = MAX_CONCURRENT_IMAGES_TO_LOAD - numImagesLoading;
+    }
+    // console.log({ numToStartLoading });
+    for(let i = 0; i < numToStartLoading; ++i) {
+      let imageToStartLoading: JcdV3Image;
+      imageToStartLoading = nextGalleryImages.find(galleryImage => {
+        return !galleryImage.load && !galleryImage.loaded;
+      });
+      if(imageToStartLoading !== undefined) {
+        imageToStartLoading.load = true;
+      }
+    }
+
+    setGalleryImages(nextGalleryImages);
   }
 
   function handleImageLoaded(loadedImage: JcdV3Image) {
-    let foundUnloadedImageIdx: number, foundImagesToLoadIdx: number;
-    let nextUnloadedImages: JcdV3Image[], nextImagesToLoad: JcdV3Image[];
-    loadedImage.loaded = true;
-    foundImagesToLoadIdx = imagesToLoad.findIndex(imageToLoad => {
-      return imageToLoad.id === loadedImage.id;
+    let nextGalleryImages: JcdV3Image[];
+    let foundGalleryImageIdx: number, foundGalleryImage: JcdV3Image;
+    nextGalleryImages = galleryImages.slice();
+    foundGalleryImageIdx = nextGalleryImages.findIndex(galleryImage => {
+      return galleryImage.id === loadedImage.id;
     });
-    foundUnloadedImageIdx = unloadedImages.findIndex(unloadedImage => {
-      return unloadedImage.id === loadedImage.id;
-    });
-    nextUnloadedImages = unloadedImages.slice();
-    nextImagesToLoad = imagesToLoad.slice();
+    foundGalleryImage = nextGalleryImages[foundGalleryImageIdx];
+    foundGalleryImage.loaded = true;
+    setImagesToLoad(nextGalleryImages);
+  }
 
-    nextUnloadedImages.splice(foundUnloadedImageIdx, 1);
-    nextImagesToLoad.splice(foundImagesToLoadIdx, 1);
-    setUnloadedImages(nextUnloadedImages);
-    setImagesToLoad(nextImagesToLoad);
+  async function initArtPage() {
+    let nextJcdArtImages: JcdV3Image[];
+    nextJcdArtImages = await JcdV3Service.getProjectImages(JCD_V3_ART_PROJECT_KEY);
+
+    for(let i = 0; i < MAX_CONCURRENT_IMAGES_TO_LOAD; ++i) {
+      if(nextJcdArtImages[i] !== undefined) {
+        nextJcdArtImages[i].load = true;
+      }
+    }
+
+    setGalleryImages(nextJcdArtImages);
   }
 
   function handleImageSelect(jcdProjectImage: JcdV3Image) {

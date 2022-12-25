@@ -17,6 +17,7 @@ type JcdV3ImageType = `${JCD_V3_IMAGE_TYPE_ENUM}`;
 
 export class JcdV3Image {
 
+  public load: boolean;
   public loaded: boolean;
 
   constructor(
@@ -27,6 +28,7 @@ export class JcdV3Image {
     public active: boolean,
     public imageType: JcdV3ImageType,
   ) {
+    this.load = false;
     this.loaded = false;
   }
 

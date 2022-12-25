@@ -3,7 +3,6 @@ import './scenery-section.scss';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ScenicPage } from './scenic-page/scenic-page';
-import { SceneryGalleryPage } from './scenery-gallery-page/scenery-gallery-page';
 import { ScenicProjectPage } from './scenic-project-page/scenic-project-page';
 
 interface HomeSectionProps {
