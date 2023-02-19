@@ -16,6 +16,7 @@ const ART_IMAGE_WIDTH = 500;
 const ART_IMAGE_HEIGHT = 400;
 
 const MAX_CONCURRENT_IMAGES_TO_LOAD = 3;
+// const MAX_CONCURRENT_IMAGES_TO_LOAD = 300;
 
 type ArtSectionProps = {
 

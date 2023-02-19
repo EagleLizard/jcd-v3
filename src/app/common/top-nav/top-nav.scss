@@ -14,8 +14,7 @@
       padding-left: 10px;
       .logo-image {
         img {
-          align-self: center;
-          max-height: 80%;
+          height: 80%;
         }
       }
     }
@@ -24,11 +23,11 @@
 
 .top-nav {
   .top-nav-container {
-    // background-color: chartreuse;
     display: flex;
     .logo-image-link {
       padding-left: 30px;
       display: flex;
+      min-width: 0;
       &:hover {
         /*
         Generated with CSS Filter generator: https://codepen.io/sosuke/pen/Pjoqqp
@@ -40,6 +39,10 @@
       }
       .logo-image {
         display: flex;
+        img {
+          align-self: center;
+          height: 90%;
+        }
       }
     }
     .top-nav-links {
@@ -72,6 +75,10 @@
       .menu-icon-container {
         padding: 0 20px;
         cursor: pointer;
+        &:hover {
+          color: $highlight-font-color;
+        }
+
         .menu-toggle-icon {
           font-size: 30px;
         }
