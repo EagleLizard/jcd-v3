@@ -47,22 +47,25 @@ export function AboutSection(props: AboutSectionProps) {
 
           <div className="about-content-section">
             <div className="heading-text text-content">
-              Janice Chan is a scenic designer based in Utah Valley, USA,
+              Janice Chan is a scenic designer based in Utah, UT;
             </div>
             <div className="text-content">
-              highly driven by unconventional storytelling and informed by stylised art forms and surrealism. She holds a B.F.A. in Theatre Arts: Scenic Design from Utah Valley University, where she earned the Outstanding Student Award from the School of the Arts.
+              she explores unconventional storytelling through surreal and stylized art forms. She holds a B.F.A. in Theatre Arts: Scenic Design from Utah Valley University, where she earned the School of the Arts Outstanding Student Award.
             </div>
             <div className="text-content">
-              Her work has been featured in Utah’s iconic theatre scene, including the Rose Wagner Performing Arts Center, Sundance Summer Theatre, The Great Salt Lake Fringe Festival, Utah Renaissance Faire, and The Noorda Center for the Performing Arts to name a few. She has designed for theatre, opera, and dance.
+              Her repertoire spans theatre, opera, and dance in Utah’s renowned entertainment scene: Rose Wagner Performing Arts Center, Sundance Summer Theatre, The Great Salt Lake Fringe Festival, Utah Renaissance Faire, The Noorda Center for the Performing Arts, and more.
             </div>
             <div className="text-content">
-              Janice believes that human connection in storytelling is everything. Her passion for non-traditional designs offers a fresh and unique perspective in every project she pursues. She draws inspiration from her day-to-day life, her natural surroundings, and food. Heaps of food.
+              She’s collaborated with nationally recognised directors and award-winning producers, elevating the stage with visually impactful experiences. Janice believes that human connection is the foundation of meaningful storytelling. Her non-traditional approach offers a unique perspective that challenges social norms, often with strong use of symbolism and mood.
             </div>
             <div className="text-content">
-              Janice has a background in administration in academic settings and social media marketing. She enjoys interior design and aesthetics, really good graphic design, lo-fi beats, smoked gouda on every occasion, and planning her trips solely around eating and museumgoing.
+              Janice has a background in administration and marketing in academia. She enjoys interior design, existential works, and draws artistic inspiration from a love of gastronomy and all aspects of this little life.
             </div>
             <div className="text-content">
-              Janice serves as the Director of Scenic and Props at An Other Theater Company, a non-profit that serves to uplift and inspire the local LGBTQIA+ community. As a first-generation immigrant from Hong Kong and Melbourne, Australia, she is committed to projects that serve and centre the voices of marginalised communities, and supports safe and accessible entertainment practices during the pandemic and beyond.
+              She was featured in SLUG Magazine’s Design in Utah issue and guest-starred on Bit by Bit: Broadway’s Only Broadcast Dedicated to the Producer/Investor Relationship, hosted by award-winning producer Megan Ann Rasmussen (A Beautiful Noise: The Neil Diamond Musical, Harmony, Kinky Boots). Her work has been widely reviewed by publishers like Salt Lake Magazine, The Utah Review, BroadwayWorld, and Front Row Reviewers.
+            </div>
+            <div className="text-content">
+              Janice’s upcoming designs will be presented at The Noorda Center for the Performing Arts and Plan-B Theatre Company.
             </div>
           </div>
 

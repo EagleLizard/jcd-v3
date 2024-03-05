@@ -1,5 +1,10 @@
 
 export const ABOUT_SECTION_PROJECT_LIST: string[] = [
+  'Bitter Lemon (Plan-B Theatre Company - World Premiere)',
+  'Balthazar (Plan-B Theatre Company - World Premiere)',
+  'Hänsel und Gretel (Utah Valley University)',
+  'The Diary of Anne Frank (Utah Valley University)',
+  'Mockingbird (Theatre for Youth and Education Center - Touring Production)',
   'Go Home Come Back (Plan-B Theatre Company - World Premiere)',
   'The Tales of Hoffmann (Utah Valley University)',
   'My Brother was a Vampire (Plan-B Theatre Company - World Premiere)',
