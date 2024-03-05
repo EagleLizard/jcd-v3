@@ -1,6 +1,6 @@
 
 const MAX_HORIZONTAL_RES = 1920;
-const MAX_VERTICAL_RES = 1080;
+const MAX_VERTICAL_RES = 1600;
 
 const JCD_BASE_URI = 'https://eaglelizard.wm.r.appspot.com';
 // const JCD_BASE_URI = 'http://localhost:4369';
