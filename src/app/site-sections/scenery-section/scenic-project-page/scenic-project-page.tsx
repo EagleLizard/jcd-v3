@@ -18,7 +18,7 @@ const GALLERY_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.4);
 const GALLERY_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.4);
 
 type ScenicProjectPageProps = {
-
+  //
 };
 
 export function ScenicProjectPage(props: ScenicProjectPageProps) {
@@ -186,7 +186,7 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
               <img
                 src={
                   getResizedUri({
-                    uri: JcdV3Service.getImageUri(titleImage.bucketFile),
+                    uri: getImageUri(titleImage.bucketFile),
                     width: TITLE_IMAGE_WIDTH,
                     height: TITLE_IMAGE_HEIGHT,
                   })
@@ -212,7 +212,7 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
               <img
                 src={
                   getResizedUri({
-                    uri: JcdV3Service.getImageUri(headingImage.bucketFile),
+                    uri: getImageUri(headingImage.bucketFile),
                     width: TITLE_IMAGE_WIDTH,
                     height: TITLE_IMAGE_HEIGHT,
                   })
@@ -296,7 +296,7 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
                 <img
                   src={
                     getResizedUri({
-                      uri: JcdV3Service.getImageUri(galleryImage.bucketFile),
+                      uri: getImageUri(galleryImage.bucketFile),
                       width: GALLERY_IMAGE_WIDTH,
                       height: GALLERY_IMAGE_HEIGHT,
                     })
@@ -384,4 +384,8 @@ export function ScenicProjectPage(props: ScenicProjectPageProps) {
     handleImageSelect(nextProjectImage);
   }
 
+}
+
+function getImageUri(resource: string): string {
+  return JcdV3Service.getImageUri(resource);
 }

@@ -5,11 +5,13 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
 
 module.exports = (env, argv) => {
   let webpackConfig;
+  console.log(env);
 
   const isDevelopment = argv.mode !== 'production';
 
@@ -24,6 +26,13 @@ module.exports = (env, argv) => {
   const forkTsCheckerWebpackPlugin = new ForkTsCheckerWebpackPlugin();
   const terserPlugin = new TerserPlugin({
     extractComments: false,
+  });
+  const environmentPlugin = new EnvironmentPlugin({
+    /*
+      'jcd_v3' | 'ezd_v1'
+    _*/
+    'JCD_API': 'jcd_v3',
+    // 'JCD_API': 'ezd_v1',
   });
 
   webpackConfig = {
@@ -121,6 +130,7 @@ module.exports = (env, argv) => {
       htmlPlugin,
       miniCssExtractPlugin,
       forkTsCheckerWebpackPlugin,
+      environmentPlugin,
     ],
   };
 

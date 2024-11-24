@@ -3,12 +3,18 @@ import { JCD_BASE_URI, JCD_V3_IMAGE_BASEPATH, MONTH_NAMES } from '../constants/c
 import { JcdV3Image } from '../models/jcd-models-v3/jcd-v3-image';
 import { JcdV3Project } from '../models/jcd-models-v3/jcd-v3-project';
 import { JcdV3ProjectPreview } from '../models/jcd-models-v3/jcd-v3-project-preview';
+import { EzdApiService } from './ezd-api-service';
+
+const API_VERSION = `${process.env.JCD_API}`;
 
 export class JcdV3Service {
   static async getProjectPreviews(): Promise<JcdV3ProjectPreview[]> {
     let uri: string;
     let resp: Response, rawRespData: unknown;
     let projectPreviews: JcdV3ProjectPreview[];
+    if(API_VERSION === 'ezd_v1') {
+      return EzdApiService.getProjectPreviews();
+    }
     uri = `${JCD_BASE_URI}/jcd/v1/project`;
     resp = await fetch(uri);
     rawRespData = await resp.json();
@@ -27,6 +33,9 @@ export class JcdV3Service {
     let uri: string;
     let resp: Response, rawRespData: unknown;
     let jcdProject: JcdV3Project;
+    if(API_VERSION === 'ezd_v1') {
+      return EzdApiService.getProjectByRoute(projectRoute);
+    }
     uri = `${JCD_BASE_URI}/jcd/v1/project/${projectRoute}`;
     resp = await fetch(uri);
     rawRespData = await resp.json();
@@ -43,6 +52,9 @@ export class JcdV3Service {
     let uri: string;
     let resp: Response, rawRespData: unknown;
     let jcdImages: JcdV3Image[];
+    if(API_VERSION === 'ezd_v1') {
+      return EzdApiService.getProjectImages(projectKey);
+    }
     uri = `${JCD_BASE_URI}/jcd/v1/project/images/${projectKey}`;
     resp = await fetch(uri);
     rawRespData = await resp.json();
@@ -76,6 +88,9 @@ export class JcdV3Service {
   }
 
   static getImageUri(resource: string): string {
+    if(API_VERSION === 'ezd_v1') {
+      return EzdApiService.getImageUri(resource);
+    }
     return `${JCD_V3_IMAGE_BASEPATH}${resource}`;
   }
 

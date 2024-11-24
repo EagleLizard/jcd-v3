@@ -10,8 +10,9 @@
       user-select: none;
       img {
         background-color: #FFF;
-        max-width: 85vw;
-        max-height: 85vh;
+        max-width: 95vw;
+        /* 95vh minus approx. modal close icon control height */
+        max-height: calc(95vh - 80px);
         &.image-loading {
           display: none; 
         }
