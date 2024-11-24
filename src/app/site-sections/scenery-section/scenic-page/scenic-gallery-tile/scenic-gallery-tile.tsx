@@ -8,8 +8,10 @@ import { MAX_HORIZONTAL_RES, MAX_VERTICAL_RES } from '../../../../constants/cons
 import { JcdV3ProjectPreview } from '../../../../models/jcd-models-v3/jcd-v3-project-preview';
 import { JcdV3Service } from '../../../../services/jcd-v3-service';
 
-const GALLERY_TILE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES);
-const GALLERY_TILE_IMG_WIDTH = Math.round(MAX_HORIZONTAL_RES);
+// const GALLERY_TILE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES);
+// const GALLERY_TILE_IMG_WIDTH = Math.round(MAX_HORIZONTAL_RES);
+const GALLERY_TILE_IMG_HEIGHT = 1600;
+const GALLERY_TILE_IMG_WIDTH = GALLERY_TILE_IMG_HEIGHT;
 
 // const GALLERY_TILE_IMG_HEIGHT = Math.round(MAX_VERTICAL_RES / 2);
 // const GALLERY_TILE_IMG_WIDTH = Math.round(MAX_HORIZONTAL_RES / 2);

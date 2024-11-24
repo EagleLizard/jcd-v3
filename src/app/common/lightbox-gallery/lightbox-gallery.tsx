@@ -12,8 +12,10 @@ import { JcdV3Service } from '../../services/jcd-v3-service';
 import { getResizedUri } from '../../services/gallery-service';
 
 // const LIGHTBOX_GALLERY_IMAGE_WIDTH = 3840;
-const LIGHTBOX_GALLERY_IMAGE_WIDTH = 2048;
-const LIGHTBOX_GALLERY_IMAGE_HEIGHT = 2160;
+// const LIGHTBOX_GALLERY_IMAGE_WIDTH = 2048;
+// const LIGHTBOX_GALLERY_IMAGE_HEIGHT = 2160;
+const LIGHTBOX_GALLERY_IMAGE_WIDTH = 2560;
+const LIGHTBOX_GALLERY_IMAGE_HEIGHT = 2700;
 
 type LighboxGalleryProps = {
   jcdImages: JcdV3Image[];
@@ -28,7 +30,6 @@ export function LighboxGallery(props: LighboxGalleryProps) {
   const [ isImageLoaded, setIsImageLoaded ] = useState<boolean>(false);
   const [ currImageIdx, setCurrImageIdx ] = useState<number>();
   const [ selectedImage, setSelectedImage ] = useState<JcdV3Image>();
-
 
   useEffect(() => {
     let nextSelectedImage: JcdV3Image;

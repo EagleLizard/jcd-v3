@@ -11,11 +11,11 @@ import { getResizedUri } from '../../../services/gallery-service';
 import { GALLERY_IMAGE_ID_SEARCH_PARAM_KEY, MAX_HORIZONTAL_RES, MAX_VERTICAL_RES } from '../../../constants/constants';
 import { LighboxGallery } from '../../../common/lightbox-gallery/lightbox-gallery';
 
-const TITLE_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.6);
-const TITLE_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.8);
+const TITLE_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.6); // 1920 * 0.6 = 1152
+const TITLE_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.8); // 1600 * 0.8 = 1280
 
-const GALLERY_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.4);
-const GALLERY_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.4);
+const GALLERY_IMAGE_WIDTH = Math.round(MAX_HORIZONTAL_RES * 0.4); // 1920 * 0.4 = 768
+const GALLERY_IMAGE_HEIGHT = Math.round(MAX_VERTICAL_RES * 0.4); // 1600 * 0.4 = 640
 
 type ScenicProjectPageProps = {
   //

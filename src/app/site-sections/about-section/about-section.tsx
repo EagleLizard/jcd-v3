@@ -1,6 +1,6 @@
 
 import './about-section.scss';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { JcdV3Service } from '../../services/jcd-v3-service';
 import { getResizedUri } from '../../services/gallery-service';
 
@@ -22,6 +22,13 @@ type AboutSectionProps = {
 };
 
 export function AboutSection(props: AboutSectionProps) {
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.documentElement.scrollTo(0, 0);
+    }, 0);
+  });
+
   return (
     <div className="about-page">
       <div className="about-page-container">
@@ -37,6 +44,8 @@ export function AboutSection(props: AboutSectionProps) {
                   src={getResizedUri({
                     uri: JcdV3Service.getImageUri(aboutImageBucketFile),
                     width: ABOUT_IMAGE_WIDTH,
+                    // width: 768,
+                    // height: 640,
                   })}
                 />
               </div>
