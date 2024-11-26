@@ -1,6 +1,6 @@
 
-@import '../../../global.scss';
-@import '../../../../styles/responsive.scss';
+@use '../../../global.scss';
+@use '../../../../styles/responsive.scss';
 
 $info-sections-vertical-padding: 20px;
 $info-container-padding: 30px;
@@ -22,7 +22,7 @@ $info-container-padding: 30px;
     .title-info {
       padding: $info-container-padding;
       .project-title {
-        font-size: $font-xlg;
+        font-size: global.$font-xlg;
         font-family: 'Roboto Condensed', sans-serif;
         text-transform: uppercase;
         font-weight: 700;
@@ -30,7 +30,7 @@ $info-container-padding: 30px;
       .project-playwrights-container {
         padding-top: $info-sections-vertical-padding;
         .project-playwright {
-          font-size: $font-sm;
+          font-size: global.$font-sm;
           &:not(:first-child) {
             padding-top: 5px;
           }
@@ -38,18 +38,18 @@ $info-container-padding: 30px;
       }
       .project-venue-producer {
         padding-top: $info-sections-vertical-padding;
-        font-size: $font-sm;
+        font-size: global.$font-sm;
       }
       .project-date {
         font-family: 'Roboto Condensed', sans-serif;
         text-transform: uppercase;
         padding-top: $info-sections-vertical-padding;
-        font-size: $font-lg;
+        font-size: global.$font-lg;
       }
       .project-description-container {
         padding-top: $info-sections-vertical-padding;
         .project-description {
-          font-size: $font-xs;
+          font-size: global.$font-xs;
           &:not(:first-child) {
             padding-top: 18px;
           }
@@ -61,14 +61,14 @@ $info-container-padding: 30px;
     }
   }
 
-  @include screenSizeMedium {
+  @include responsive.screenSizeMedium {
     .title-section {
       .title-image-section {
         min-height: 40vh;
       }
     }
   }
-  @include screenSizeSmall {
+  @include responsive.screenSizeSmall {
     .title-section {
       flex-direction: column-reverse;
       .title-image-section {
@@ -92,7 +92,7 @@ $info-container-padding: 30px;
       .production-credits-container {
         .production-credit {
           // font-weight: 300;
-          font-size: $font-sm;
+          font-size: global.$font-sm;
           &:not(:first-child) {
             padding-top: 5px;
           }
@@ -116,7 +116,7 @@ $info-container-padding: 30px;
             a.media-and-press-link-anchor {
               color: inherit;
               &:hover {
-                color: $highlight-font-color;
+                color: global.$highlight-font-color;
               }
             }
           }
@@ -132,14 +132,14 @@ $info-container-padding: 30px;
     }
   }
 
-  @include screenSizeMedium {
+  @include responsive.screenSizeMedium {
     .gallery-heading-section {
       .title-image-section {
         min-height: 40vh;
       }
     }
   }
-  @include screenSizeSmall {
+  @include responsive.screenSizeSmall {
     .gallery-heading-section {
       flex-direction: column;
       .title-image-section {
@@ -223,7 +223,7 @@ $info-container-padding: 30px;
     }
   }
 
-  @include screenSizePhone {
+  @include responsive.screenSizePhone {
     .gallery-images-section {
       .gallery-image-container {
         // &:nth-child(1n) {

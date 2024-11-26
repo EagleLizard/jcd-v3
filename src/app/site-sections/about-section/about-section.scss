@@ -1,10 +1,10 @@
 
-@import '../../global.scss';
-@import '../../../styles/responsive.scss';
+@use '../../global.scss';
+@use '../../../styles/responsive.scss';
 
 .about-page {
-  background-color: $jcd-background-color-secondary;
-  color: $jcd-font-color-secondary;
+  background-color: global.$jcd-background-color-secondary;
+  color: global.$jcd-font-color-secondary;
   max-width: 100%;
   .about-page-container {
     display: flex;
@@ -29,14 +29,14 @@
           padding-top: 40px;
         }
         .text-content {
-          font-size: $font-mmmd;
+          font-size: global.$font-mmmd;
 
           &:not(:first-child) {
             padding-top: 20px;
           }
           &.heading-text {
             text-transform: uppercase;
-            font-size: $font-xxlg;
+            font-size: global.$font-xxlg;
             font-weight: 700;
             font-family: 'Roboto Condensed', sans-serif;
             .inner-text {
@@ -48,12 +48,12 @@
             a.email-link {
               color: inherit;
               &:hover {
-                color: $highlight-font-color;
+                color: global.$highlight-font-color;
               }
             }
           }
           .project-list-item {
-            font-size: $font-mmd;
+            font-size: global.$font-mmd;
             &:not(:first-child) {
               padding-top: 6px;
             }
@@ -73,42 +73,42 @@
               text-decoration: underline;
             }
             &:hover {
-              color: $highlight-font-color;
+              color: global.$highlight-font-color;
             }
           }
         }
       }
     }
   }
-  @include screenSizeMedium {
+  @include responsive.screenSizeMedium {
     .about-page-container
     .about-content-container
     .about-content-section
     .text-content {
-      font-size: $font-mmd;
+      font-size: global.$font-mmd;
       &.heading-text {
-        font-size: $font-xlg;
+        font-size: global.$font-xlg;
       }
       .project-list-item {
-        font-size: $font-md;
+        font-size: global.$font-md;
       }
     }
   }
-  @include screenSizeSmall {
+  @include responsive.screenSizeSmall {
     .about-page-container
     .about-content-container
     .about-content-section
     .text-content {
-      font-size: $font-md;
+      font-size: global.$font-md;
       &.heading-text {
-        font-size: $font-lg;
+        font-size: global.$font-lg;
       }
       .project-list-item {
-        font-size: $font-sm;
+        font-size: global.$font-sm;
       }
     }
   }
-  @include screenSizePhone {
+  @include responsive.screenSizePhone {
     
     .about-page-container {
       .about-photo-section {
@@ -121,9 +121,9 @@
         padding: 5px 10px;
         .about-content-section
         .text-content {
-          font-size: $font-xxs;
+          font-size: global.$font-xxs;
           &.heading-text {
-            font-size: $font-mmd;
+            font-size: global.$font-mmd;
           }
           .inner-text {
             a.email-link {
@@ -131,7 +131,7 @@
             }
           }
           .project-list-item {
-            font-size: $font-xxxs;
+            font-size: global.$font-xxxs;
             &:not(:first-child) {
               padding-top: 4px;
             }

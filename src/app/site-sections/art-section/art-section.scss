@@ -1,6 +1,6 @@
 
-@import '../../global.scss';
-@import '../../../styles/responsive.scss';
+@use '../../global.scss';
+@use '../../../styles/responsive.scss';
 
 .art-section {
   .art-section-heading {
@@ -8,11 +8,11 @@
     .header-text {
       font-family: 'Roboto Condensed', sans-serif;
       font-weight: 700;
-      font-size: $font-xxlg;
+      font-size: global.$font-xxlg;
     }
     .content-text {
       padding-top: 30px;
-      font-size: $font-mmd;
+      font-size: global.$font-mmd;
     }
   }
 
@@ -46,14 +46,14 @@
     }
   }
 
-  @include screenSizeSmall {
+  @include responsive.screenSizeSmall {
     .art-section-heading {
       padding: 35px 25px;
       .header-text {
-        font-size: $font-xlg;
+        font-size: global.$font-xlg;
       }
       .content-text {
-        font-size: $font-md;
+        font-size: global.$font-md;
       }
     }
     .art-gallery-section
@@ -63,14 +63,14 @@
       max-width: 25vw;
     }
   }
-  @include screenSizePhone {
+  @include responsive.screenSizePhone {
     .art-section-heading {
       padding: 30px 20px;
       .header-text {
-        font-size: $font-lg;
+        font-size: global.$font-lg;
       }
       .content-text {
-        font-size: $font-xs;
+        font-size: global.$font-xs;
       }
     }
     .art-gallery-section

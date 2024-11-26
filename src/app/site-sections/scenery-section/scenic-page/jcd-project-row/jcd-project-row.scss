@@ -1,5 +1,5 @@
 
-@import '../../../../../styles/responsive.scss';
+@use '../../../../../styles/responsive.scss';
 
 .jcd-project-row {
 
@@ -16,7 +16,7 @@
     // height: calc(100vh / 3);
   }
 
-  @include screenSizePhone {
+  @include responsive.screenSizePhone {
     .jcd-project-row-content {
       .jcd-project-row-items-container {
         flex-direction: column;

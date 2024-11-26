@@ -1,7 +1,7 @@
 
 import './lightbox-modal.scss';
 import React from 'react';
-import ModalUnstyled from '@mui/base/ModalUnstyled';
+import { Modal } from '@mui/base/Modal';
 
 type LightboxModalProps = {
   open: boolean;
@@ -12,7 +12,7 @@ type LightboxModalProps = {
 
 export function LightboxModal(props: LightboxModalProps) {
   return (
-    <ModalUnstyled
+    <Modal
       className="lightbox-modal"
       slots={{
         backdrop: LightboxModalBackdrop,
@@ -26,7 +26,7 @@ export function LightboxModal(props: LightboxModalProps) {
           props.children
         }
       </div>
-    </ModalUnstyled>
+    </Modal>
   );
 
   function handleOnClose() {

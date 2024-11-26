@@ -1,6 +1,6 @@
 
-@import '../../../../global.scss';
-@import '../../../../../styles/responsive.scss';
+@use '../../../../global.scss';
+@use '../../../../../styles/responsive.scss';
 
 .scenic-gallery-tile {
   position: relative;
@@ -43,31 +43,31 @@
 
     .overlay-text-container{
       font-family: 'Roboto Condensed', sans-serif;
-      font-size: $font-xlg;
+      font-size: global.$font-xlg;
       text-transform: uppercase;
       font-weight: 700;
       position: absolute;
       // color: #000;
-      color: $jcd-font-color-secondary;
+      color: global.$jcd-font-color-secondary;
       top: 10px;
       left: 10px;
       text-align: left;
       padding-right: 10px;
     }
   }
-  @include screenSizeWide {
+  @include responsive.screenSizeWide {
     .image-overlay {
       .overlay-text-container {
-        font-size: $font-xxlg;
+        font-size: global.$font-xxlg;
         top: 25px;
         left: 25px;
       }
     }
   }
-  @include screenSizeSmall {
+  @include responsive.screenSizeSmall {
     .image-overlay {
       .overlay-text-container {
-        font-size: $font-lg;
+        font-size: global.$font-lg;
       }
     }
   }

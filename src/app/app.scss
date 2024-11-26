@@ -1,5 +1,5 @@
 
-@import './global.scss';
+@use 'global.scss';
 
 .app-main {
   .header-text {
@@ -11,18 +11,18 @@
     right: 0px;
     left: auto;
     width: 100%;
-    bottom: $top-nav-height;
-    min-height: $top-nav-height;
-    max-height: $top-nav-height;
-    background-color: $jcd-background-color-primary;
+    bottom: global.$top-nav-height;
+    min-height: global.$top-nav-height;
+    max-height: global.$top-nav-height;
+    background-color: global.$jcd-background-color-primary;
     z-index: 1;
     // box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2);
   }
   .app-content-container {
-    padding-top: $top-nav-height + 0px;
+    padding-top: global.$top-nav-height + 0px;
   }
   .footer-container {
-    min-height: $footer-height;
+    min-height: global.$footer-height;
   }
 }
 
@@ -30,8 +30,8 @@
   width: 30vw;
   padding: 10px 10px;
   height: 100%;
-  background-color: $jcd-background-color-primary;
-  color: $jcd-font-color-primary;
+  background-color: global.$jcd-background-color-primary;
+  color: global.$jcd-font-color-primary;
   .drawer-nav-list-item {
     display: flex;
     a.drawer-nav-link {
@@ -41,9 +41,9 @@
       font-weight: 700;
       text-transform: uppercase;
       text-decoration: none;
-      font-size: $font-mmd;
+      font-size: global.$font-mmd;
       &:hover {
-        color: $highlight-font-color;
+        color: global.$highlight-font-color;
       }
     }
   }

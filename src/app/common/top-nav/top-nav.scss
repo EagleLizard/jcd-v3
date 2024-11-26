@@ -1,6 +1,6 @@
 
-@import '../../global.scss';
-@import '../../../styles/responsive.scss';
+@use '../../global.scss';
+@use '../../../styles/responsive.scss';
 
 @mixin topNavPhone {
   .top-nav-container {
@@ -60,9 +60,9 @@
           font-weight: 700;
           text-transform: uppercase;
           text-decoration: none;
-          font-size: $font-md;
+          font-size: global.$font-md;
           &:hover {
-            color: $highlight-font-color;
+            color: global.$highlight-font-color;
           }
         }
       }
@@ -76,7 +76,7 @@
         padding: 0 20px;
         cursor: pointer;
         &:hover {
-          color: $highlight-font-color;
+          color: global.$highlight-font-color;
         }
 
         .menu-toggle-icon {
@@ -85,11 +85,11 @@
       }
     }
   }
-  @include screenSizeSmall {
+  @include responsive.screenSizeSmall {
     // fix for iphone layout...
     @include topNavPhone();
   }
-  @include screenSizePhone {
+  @include responsive.screenSizePhone {
     @include topNavPhone();
   }
   .dev-screen-size {
@@ -104,22 +104,22 @@
       font-size: 14px;
       display: inline-block;
     }
-    @include screenSizeWide {
+    @include responsive.screenSizeWide {
       .screen.wide {
         background-color: chartreuse;
       }
     }
-    @include screenSizeMedium {
+    @include responsive.screenSizeMedium {
       .screen.medium {
         background-color: chartreuse;
       }
     }
-    @include screenSizeSmall {
+    @include responsive.screenSizeSmall {
       .screen.small {
         background-color: chartreuse;
       }
     }
-    @include screenSizePhone {
+    @include responsive.screenSizePhone {
       .screen.phone {
         background-color: chartreuse;
       }

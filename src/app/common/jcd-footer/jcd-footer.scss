@@ -1,11 +1,11 @@
 
-@import '../../global.scss';
-@import '../../../styles/responsive.scss';
+@use '../../global.scss';
+@use '../../../styles/responsive.scss';
 
 .jcd-footer {
   display: flex;
   width: 100%;
-  height: $footer-height;
+  height: global.$footer-height;
   .jcd-footer-item {
     flex: 1 1;
     display: flex;
@@ -26,7 +26,7 @@
 
     .footer-item-content {
       // padding: 0 30px;
-      font-size: $font-md;
+      font-size: global.$font-md;
       font-weight: 700;
       text-transform: uppercase;
       .breakable-footer-item {
@@ -37,16 +37,16 @@
   a.email-link {
     color: inherit;
     &:hover {
-      color: $highlight-font-color;
+      color: global.$highlight-font-color;
     }
   }
-  @include screenSizeMedium {
+  @include responsive.screenSizeMedium {
     .jcd-footer-item
     .footer-item-content {
       // font-size: $font-sm;
     }
   }
-  @include screenSizeSmall {
+  @include responsive.screenSizeSmall {
     .jcd-footer-item {
       &.footer-left {
         padding-left: 15px;
@@ -58,14 +58,14 @@
         padding-right: 15px;
       }
       .footer-item-content {
-        font-size: $font-xs;
+        font-size: global.$font-xs;
         .breakable-footer-item {
           flex-wrap: wrap;
         }
       }
     }
   }
-  @include screenSizePhone {
+  @include responsive.screenSizePhone {
     .jcd-footer-item {
       &.footer-left {
         padding-left: 8px;
@@ -78,7 +78,7 @@
         padding-right: 8px;
       }
       .footer-item-content {
-        font-size: $font-xxxxs;
+        font-size: global.$font-xxxxs;
         .breakable-footer-item {
           flex-wrap: wrap;
         }
