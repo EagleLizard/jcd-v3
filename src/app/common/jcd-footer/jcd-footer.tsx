@@ -26,7 +26,7 @@ export function JcdFooter(props: JcdFooterProps) {
       </div>
       <div className="jcd-footer-item footer-middle">
         <div className="footer-item-content">
-          © 2024 Janice Chan Designs
+          © 2025 Janice Chan Designs
         </div>
       </div>
       <div className="jcd-footer-item footer-right">

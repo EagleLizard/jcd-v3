@@ -4,7 +4,8 @@ const MAX_VERTICAL_RES = 1600;
 
 const JCD_BASE_URI = 'https://eaglelizard.wm.r.appspot.com';
 // const JCD_BASE_URI = 'http://localhost:4369';
-const EZD_API_BASE_URI = 'http://localhost:4446';
+// const EZD_API_BASE_URI = 'http://localhost:4446';
+const EZD_API_BASE_URI = 'https://ezd-api-mbp.eaglelizard.com';
 
 const JCD_IMAGE_BASEPATH = `${JCD_BASE_URI}/image/v1/`;
 const JCD_V3_IMAGE_BASEPATH = `${JCD_BASE_URI}/image/v2/`;

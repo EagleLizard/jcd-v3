@@ -1,5 +1,11 @@
 
 export const ABOUT_SECTION_PROJECT_LIST: string[] = [
+  /* 2025 */
+  'Kilo-Wat (Plan-B Theatre Company - World Premiere)',
+  'Metamorphoses (Utah Valley University)',
+  'Werther (Utah Valley University)',
+  'Full Color (Plan-B Theatre Company - World Premiere)',
+  /* 2024 */
   'Bitter Lemon (Plan-B Theatre Company - World Premiere)',
   'Balthazar (Plan-B Theatre Company - World Premiere)',
   'Hänsel und Gretel (Utah Valley University)',
